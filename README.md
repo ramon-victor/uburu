@@ -32,7 +32,24 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 1. O aplicativo deve ser capaz de lidar com grandes quantidades de dados e arquivos sem falhas ou erros.
 1. O aplicativo deve ser seguro e proteger a privacidade dos usuários, não acessando arquivos sem permissão e não coletando dados pessoais sem consentimento explícito.
 1. O aplicativo deve ser seguro e não comprometer a privacidade ou a segurança dos dados do usuário.
+1. Ao menos 70% do código deve ser cobrido por testes unitários.
 
 ## 3. Diagrama de casos de uso
 
 ## 4. Diagrama de classes
+
+## 5. Definição de tecnologias
+
+### 5.1. Springboot
+1. Facilidade para a construção de APIs: O Spring Boot é uma estrutura de desenvolvimento que foi projetada especificamente para facilitar a criação de APIs. Com o Spring Boot, você pode criar APIs de alta qualidade de forma rápida e fácil, usando uma variedade de ferramentas e recursos disponíveis.
+1. Grande quantidade de recursos disponíveis: O Spring Boot é uma plataforma extremamente poderosa que oferece uma grande quantidade de recursos e funcionalidades que podem ser utilizados em uma ampla gama de projetos. Com o Spring Boot, você tem acesso a uma biblioteca extensa e diversificada de componentes, que podem ser facilmente integrados em projetos existentes, reduzindo o tempo e o esforço necessários para o desenvolvimento de novos recursos.
+1. Familiaridade com a linguagem Java: Os envolvidos no projeto tem conhecimento e anos de experiência em desenvolvimento utilizando a linguagem Java. Fora isso, todos já participaram do desenvolvimento de um projeto utilizando o framework SPringboot.
+1. Equilíbrio entre poder computacional e a dificuldade no desenvolvimento: O Spring Boot é altamente escalável e fornece um bom equilíbrio entre poder computacional e complexidade de desenvolvimento. Ele é leve, rápido e pode ser facilmente configurado para se adaptar às necessidades do seu projeto. Com o Spring Boot, você pode ter certeza de que sua aplicação terá um bom desempenho e será fácil de manter e atualizar.
+
+### 5.2. Electron JS
+1. Cross-platform: O Electron JS é um framework cross-platform que permite criar aplicativos para desktop que podem ser executados em vários sistemas operacionais, incluindo Windows, macOS e Linux.
+1. Baseado em tecnologias web: O Electron JS é baseado em tecnologias web, como HTML, CSS e JavaScript. Isso significa que os envolvidos no projeto, que já estão familiarizados com essas tecnologias, podem facilmente criar aplicativos para desktop sem precisar aprender uma nova linguagem ou tecnologia. Além disso, como o Electron JS utiliza tecnologias web, é possível reutilizar muito do código de um aplicativo web existente para criar um aplicativo para desktop e vice-versa.
+1. Grande comunidade: O Electron JS é uma framework open-source com uma grande comunidade de desenvolvedores ativos. Isso significa que há uma grande quantidade de recursos disponíveis, incluindo documentação, bibliotecas e exemplos de código, o que facilita o desenvolvimento de aplicativos.
+1. Funcionalidades nativas: O Electron JS permite que os desenvolvedores criem aplicativos para desktop com funcionalidades nativas, como acesso a arquivos locais, notificações e integração com o sistema operacional. Isso permite que os aplicativos criados com o Electron JS tenham um desempenho semelhante ao de aplicativos nativos.
+
+## 6. Dependências do projeto
