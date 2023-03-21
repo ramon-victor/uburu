@@ -53,3 +53,5 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 1. Funcionalidades nativas: O Electron JS permite que os desenvolvedores criem aplicativos para desktop com funcionalidades nativas, como acesso a arquivos locais, notificações e integração com o sistema operacional. Isso permite que os aplicativos criados com o Electron JS tenham um desempenho semelhante ao de aplicativos nativos.
 
 ## 6. Dependências do projeto
+
+## 7. Arquitetura dos canais de comunicação das APIs
