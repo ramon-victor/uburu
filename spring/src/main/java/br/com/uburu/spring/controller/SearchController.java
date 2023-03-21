@@ -15,7 +15,7 @@ import br.com.uburu.spring.dto.HistoryDTO;
 import br.com.uburu.spring.searchTools.Tracker;
 
 @RestController
-@RequestMapping("api/v1/search")
+@RequestMapping("/api/v1/search")
 public class SearchController {
 
     @PostMapping @GetMapping

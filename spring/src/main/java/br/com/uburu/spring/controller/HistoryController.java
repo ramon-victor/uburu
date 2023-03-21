@@ -17,7 +17,7 @@ import br.com.uburu.spring.dto.HistoryDTO;
 import br.com.uburu.spring.service.HistoryService;
 
 @RestController
-@RequestMapping("api/v1/history")
+@RequestMapping("/api/v1/history")
 public class HistoryController {
 
     @Autowired

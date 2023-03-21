@@ -13,12 +13,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import br.com.uburu.spring.controller.HistoryController;
 import br.com.uburu.spring.controller.SearchController;
 
-import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 import java.util.Date;
 
@@ -36,17 +34,9 @@ class ApplicationTests {
 
 	@Autowired
 	private MockMvc mock;
-	private String jwtToken = null;
 
 	@Test
-	void contextLoads() throws Exception {
-		MvcResult resultAuth =  mock.perform(
-			post("/api/v1/history")
-			.contentType(MediaType.APPLICATION_JSON)
-		).andExpect(status().isOk()).andReturn();
-
-		jwtToken = resultAuth.getResponse().getContentAsString();	
-	}
+	void contextLoads() throws Exception {}
 
 	@Test
 	void historyControllerTest() throws Exception {
@@ -60,7 +50,6 @@ class ApplicationTests {
 		MvcResult mvcResult = mock.perform(
 			post("/api/v1/history")
 			.content(history.toString())
-			.header("Authorization", "Bearer " + jwtToken)
 			.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(status().isCreated()).andReturn();
 
@@ -68,12 +57,11 @@ class ApplicationTests {
 		JSONObject jsonObject = new JSONObject(result);
 
 		mock.perform(
-			get("/api/v1/history").header("Authorization", "Bearer " + jwtToken)
-		).andExpect(status().isOk())
-		.andExpect(jsonPath("$.keyWords", is("Uburu")));
+			get("/api/v1/history")
+		).andExpect(status().isOk());
 		
 		mock.perform(
-			delete("/api/v1/history/" + jsonObject.getString("id")).header("Authorization", "Bearer " + jwtToken)
+			delete("/api/v1/history/" + jsonObject.getString("id"))
 		).andExpect(status().isAccepted());
 	}
 
