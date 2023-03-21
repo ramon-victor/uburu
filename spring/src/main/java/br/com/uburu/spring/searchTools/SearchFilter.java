@@ -15,7 +15,7 @@ public class SearchFilter {
      */
     private List<String> invalidFolders;
 
-    private String[][] searchCriteria;
+    private String[] searchCriteria;
 
     public SearchFilter(String folder, String search) {
         splitFolders(folder);
@@ -27,7 +27,6 @@ public class SearchFilter {
      * @param String folders
      */
     private void splitFolders(String folders) {
-        // Remover todos os espaços em branco
         folders = folders.replace(" ", "");
 
         validFolders = new ArrayList<>();
@@ -51,18 +50,10 @@ public class SearchFilter {
      * @param String search
      */
     private void defineSearchCriteria(String search) {
-        // Remover todos os espaços em branco
         search = search.replace(" ", "");
 
-        String[] searchList = search.split("OR");
-        searchCriteria = new String[searchList.length][];
-
-        for (int i = 0; i < searchList.length; i ++) {
-            String sCrit = searchList[i];
-            String[] andSearch = sCrit.split("AND");
-
-            searchCriteria[i] = andSearch;
-        }
+        // Os valores AND compõe uma lista onde todos são obrigatórios
+        searchCriteria = search.split("AND");
     }
 
     /**
@@ -82,7 +73,7 @@ public class SearchFilter {
         return validFolders;
     }
 
-    public String[][] getSearchCriteria() {
+    public String[] getSearchCriteria() {
         return searchCriteria;
     }
     

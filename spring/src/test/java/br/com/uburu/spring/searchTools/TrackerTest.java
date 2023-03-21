@@ -1,5 +1,6 @@
 package br.com.uburu.spring.searchTools;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,23 +39,14 @@ public class TrackerTest {
         final File file = new File("src\\test\\java\\br\\com\\uburu\\spring\\searchTools\\test.txt");
         String path = file.getAbsolutePath();
 
-        String composedCriteria = "BLABLABLA AND UBUNTU OR Uburu2 AND Teste AND   Teste2";
+        String composedCriteria = "Uburu AND utilizada";
         SearchFilter filter = new SearchFilter(path, composedCriteria);
-        for (String[] search : filter.getSearchCriteria()) {
-            tracker.searchInFile(path, search);
-            assertTrue(tracker.getFiles().isEmpty());
 
-            tracker.clearFilesList();
-        }
+        String[] criteria = filter.getSearchCriteria();
+        assertEquals(criteria.length, 2);
 
-        composedCriteria = "Uburu AND utilizada OR palavra AND divertida";
-        filter = new SearchFilter(path, composedCriteria);
-        for (String[] search : filter.getSearchCriteria()) {
-            tracker.searchInFile(path, search);
-            assertFalse(tracker.getFiles().isEmpty());
-
-            tracker.clearFilesList();
-        }
+        tracker.searchInFile(path, criteria);
+        assertFalse(tracker.getFiles().isEmpty());
     }
 
     @Test

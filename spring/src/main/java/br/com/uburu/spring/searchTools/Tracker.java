@@ -49,11 +49,11 @@ public class Tracker {
             String line = scanner.nextLine();
 
             if (line.contains(search)) {
-                final FoundFile foundFile = new FoundFile();
-                foundFile.setFilePath(fileName);
-                foundFile.setLine(lineCount);
+                final JSONObject foundFiles = new JSONObject();
+                foundFiles.put("filePath", fileName);
+                foundFiles.put("line", lineCount);
 
-                this.files.add(foundFile.toJSON());
+                this.files.add(foundFiles);
             }
             
             lineCount ++;
@@ -81,11 +81,11 @@ public class Tracker {
                 String line = scanner.nextLine();
 
                 if (line.contains(s)) {
-                    final FoundFile foundFile = new FoundFile();
-                    foundFile.setFilePath(fileName);
-                    foundFile.setLine(lineCount);
+                    final JSONObject foundFiles = new JSONObject();
+                    foundFiles.put("filePath", fileName);
+                    foundFiles.put("line", lineCount);
 
-                    this.files.add(foundFile.toJSON());
+                    this.files.add(foundFiles);
                     constainsSearch = true;
                 }
 

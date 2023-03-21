@@ -24,22 +24,40 @@ public class SearchEngine {
      */
     public List<JSONObject> getFiles() {
         File file = new File(path);
-        boolean isFolder = file.isDirectory();
-
-        return isFolder ? readFilesFolder() : readFile();
+        return file.isDirectory() ? readFilesFolder() : readFile();
     }
 
+    /**
+     * Busca no diretório inteiro
+     * @return List<JSONObject>
+     */
     private List<JSONObject> readFilesFolder() {
-        return null;
+        List<String> folders = filter.getValidFolders();
+        String[] searchCriteria = filter.getSearchCriteria();
+
+        folders.forEach(folder -> {
+            try {
+                for (String search : searchCriteria) {
+                    File folderFile = new File(folder);
+                    tracker.listFilesForFolder(folderFile, search);
+                }
+            } catch (final Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        });
+
+        return tracker.getFiles();
     }
 
+    /**
+     * Busca num arquivo específico
+     * @return List<JSONObject>
+     */
     private List<JSONObject> readFile() {
         try {
-            String[][] searchMatrix = filter.getSearchCriteria();
-
-            for (String[] searchList : searchMatrix) {
-                tracker.searchInFile(path, searchList);
-            }
+            String[] searchMatrix = filter.getSearchCriteria();
+            tracker.searchInFile(path, searchMatrix);
         } catch (final Exception e) {
             e.printStackTrace();
             return null;

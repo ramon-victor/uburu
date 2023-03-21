@@ -20,7 +20,7 @@ public class SearchFilterTest {
         invalidFolder = "!INVALID\\FOLDER\\TEST";
         validFolder = "VALID\\FOLDER\\TEST";
 
-        filter = new SearchFilter(validFolder + ";" + invalidFolder, "Uburu AND UBUNTU OR Uburu2 AND Teste AND   Teste2");
+        filter = new SearchFilter(validFolder + ";" + invalidFolder, "Uburu AND UBUNTU");
     }
     
     @Test
@@ -47,15 +47,11 @@ public class SearchFilterTest {
     void getSearchCriteriaTest() {
         assert filter != null;
         
-        String[][] criteria = filter.getSearchCriteria();
+        String[] criteria = filter.getSearchCriteria();
         assertEquals(criteria.length, 2);
 
-        assertEquals(criteria[0][0], "Uburu");
-        assertEquals(criteria[0][1], "UBUNTU");
-
-        assertEquals(criteria[1][0], "Uburu2");
-        assertEquals(criteria[1][1], "Teste");
-        assertEquals(criteria[1][2], "Teste2");
+        assertEquals(criteria[0], "Uburu");
+        assertEquals(criteria[1], "UBUNTU");
     }
     
 }
