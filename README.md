@@ -12,7 +12,7 @@ A ferramenta proposta terá a capacidade de localizar e destacar trechos de cód
 
 Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o código duplicado e substituí-lo por soluções mais eficientes e elegantes, reduzindo a complexidade do sistema e melhorando a qualidade do software. Além disso, a ferramenta também poderá ser utilizada como uma ferramenta de aprendizado, permitindo que desenvolvedores iniciantes possam estudar diferentes soluções para um mesmo problema e aprender com as boas práticas utilizadas pelos desenvolvedores mais experientes.
 
-## 2. Requisitos do projeto
+## 2. Requisitos
 
 ### 2.1. Requisitos funcionais
 1. O aplicativo deve permitir ao usuário especificar o diretório a ser pesquisado.
