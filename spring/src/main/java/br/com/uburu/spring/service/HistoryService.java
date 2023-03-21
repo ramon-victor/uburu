@@ -7,6 +7,7 @@ import br.com.uburu.spring.dto.HistoryDTO;
 public interface HistoryService {
 
     List<HistoryDTO> getAll();
+    HistoryDTO findById(long id);
     HistoryDTO save(HistoryDTO history);
     void delete(long id);
     

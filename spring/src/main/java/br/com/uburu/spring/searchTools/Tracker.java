@@ -1,120 +1,69 @@
 package br.com.uburu.spring.searchTools;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.json.JSONObject;
 
 public class Tracker {
 
-    private List<JSONObject> files;
+    private String path;
+    private SearchFilter filter;
+    private Reader reader;
 
-    public Tracker() {
-        files = new ArrayList<>();
+    public Tracker(String path, String searchCriteria) {
+        this.path = path;
+
+        filter = new SearchFilter(path, searchCriteria);
+        reader = new Reader();
     }
 
     /**
-     * Realiza a pesquisa em todos os arquivos de um determinado diretório
-     * @param String folderName
-     * @param String search
-     * @throws FileNotFoundException
-     */
-    public void listFilesForFolder(final File folder, String search) throws FileNotFoundException {
-        String root = folder.getAbsolutePath() + "\\";
-
-        for (final File fileEntry : folder.listFiles()) {
-            if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry, search);
-            } else {
-                searchInFile(root + fileEntry.getName(), search);
-            }
-        }
-    }
-
-    /**
-     * Realiza a pesquisa em um arquivo específico
-     * @param String fileName
-     * @param String search
-     * @throws FileNotFoundException
-     */
-    public void searchInFile(String fileName, String search) throws FileNotFoundException {
-        final File file = new File(fileName);
-        final Scanner scanner = new Scanner(file);
-
-        int lineCount = 0;
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-
-            if (line.contains(search)) {
-                final JSONObject foundFiles = new JSONObject();
-                foundFiles.put("filePath", fileName);
-                foundFiles.put("line", lineCount);
-
-                this.files.add(foundFiles);
-            }
-            
-            lineCount ++;
-        }
-
-        scanner.close();
-    }
-
-    /**
-     * Realiza a pesquisa em um arquivo específico quando há mais de um termo de pesquisa
-     * @param String fileName
-     * @param String... search
-     * @throws FileNotFoundException
-     */
-    public void searchInFile(String fileName, String... search) throws FileNotFoundException {
-        final File file = new File(fileName);
-        final Scanner scanner = new Scanner(file);
-
-        boolean containsAllCriteria = true;
-        for (String s : search) {
-            boolean constainsSearch = false;
-
-            int lineCount = 0;
-            while (scanner.hasNextLine() && !constainsSearch) {
-                String line = scanner.nextLine();
-
-                if (line.contains(s)) {
-                    final JSONObject foundFiles = new JSONObject();
-                    foundFiles.put("filePath", fileName);
-                    foundFiles.put("line", lineCount);
-
-                    this.files.add(foundFiles);
-                    constainsSearch = true;
-                }
-
-                lineCount ++;
-            }
-
-            containsAllCriteria &= constainsSearch;
-        }
-
-        scanner.close();
-
-        if (!containsAllCriteria) {
-            clearFilesList();
-        }
-    }
-
-    /**
-     * Retorna os arquivos encontrados
-     * @return List<JSONObject>
+     * Retorna um objeto JSON contendo o nome dos arquivos e 
+     * @return List<JSONObject> 
      */
     public List<JSONObject> getFiles() {
-        return files;
+        File file = new File(path);
+        return file.isDirectory() ? readFilesFolder() : readFile();
     }
 
     /**
-     * Limpa a lista de arquivos
+     * Busca no diretório inteiro
+     * @return List<JSONObject>
      */
-    public void clearFilesList() {
-        files.clear();
+    private List<JSONObject> readFilesFolder() {
+        List<String> folders = filter.getValidFolders();
+        String[] searchCriteria = filter.getSearchCriteria();
+
+        folders.forEach(folder -> {
+            try {
+                for (String search : searchCriteria) {
+                    File folderFile = new File(folder);
+                    reader.listFilesForFolder(folderFile, search);
+                }
+            } catch (final Exception e) {
+                e.printStackTrace();
+                return;
+            }
+        });
+
+        return reader.getFiles();
+    }
+
+    /**
+     * Busca num arquivo específico
+     * @return List<JSONObject>
+     */
+    private List<JSONObject> readFile() {
+        try {
+            String[] searchMatrix = filter.getSearchCriteria();
+            reader.searchInFile(path, searchMatrix);
+        } catch (final Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+        return reader.getFiles();
     }
 
 }

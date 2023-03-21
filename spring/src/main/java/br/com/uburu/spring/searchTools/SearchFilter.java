@@ -15,6 +15,9 @@ public class SearchFilter {
      */
     private List<String> invalidFolders;
 
+    /**
+     * Critério de pesquisa
+     */
     private String[] searchCriteria;
 
     public SearchFilter(String folder, String search) {
