@@ -63,11 +63,58 @@ public class Tracker {
     }
 
     /**
+     * Realiza a pesquisa em um arquivo específico quando há mais de um termo de pesquisa
+     * @param String fileName
+     * @param String... search
+     * @throws FileNotFoundException
+     */
+    public void searchInFile(String fileName, String... search) throws FileNotFoundException {
+        final File file = new File(fileName);
+        final Scanner scanner = new Scanner(file);
+
+        boolean containsAllCriteria = true;
+        for (String s : search) {
+            boolean constainsSearch = false;
+
+            int lineCount = 0;
+            while (scanner.hasNextLine() && !constainsSearch) {
+                String line = scanner.nextLine();
+
+                if (line.contains(s)) {
+                    final FoundFile foundFile = new FoundFile();
+                    foundFile.setFilePath(fileName);
+                    foundFile.setLine(lineCount);
+
+                    this.files.add(foundFile.toJSON());
+                    constainsSearch = true;
+                }
+
+                lineCount ++;
+            }
+
+            containsAllCriteria &= constainsSearch;
+        }
+
+        scanner.close();
+
+        if (!containsAllCriteria) {
+            clearFilesList();
+        }
+    }
+
+    /**
      * Retorna os arquivos encontrados
      * @return List<JSONObject>
      */
     public List<JSONObject> getFiles() {
         return files;
+    }
+
+    /**
+     * Limpa a lista de arquivos
+     */
+    public void clearFilesList() {
+        files.clear();
     }
 
 }
