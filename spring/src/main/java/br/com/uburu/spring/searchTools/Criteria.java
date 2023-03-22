@@ -4,6 +4,7 @@ public class Criteria {
 
     private String keyWords;
     private String repos;
+    private String extensionFilter;
     private int line;
 
     public String getKeyWords() {
@@ -29,5 +30,13 @@ public class Criteria {
     public void setLine(int line) {
         this.line = line;
     }
-    
+
+    public String getExtensionFilter() {
+        return extensionFilter;
+    }
+
+    public void setExtensionFilter(String extensionFilter) {
+        this.extensionFilter = extensionFilter;
+    }
+
 }

@@ -18,18 +18,41 @@ public class Reader {
      * Realiza a pesquisa em todos os arquivos de um determinado diretório
      * @param String folderName
      * @param String search
+     * @param String... extensionFilter
      * @throws FileNotFoundException
      */
-    public void listFilesForFolder(final File folder, String search) throws FileNotFoundException {
+    public void listFilesForFolder(final File folder, String search, String... extensionFilter) throws FileNotFoundException {
         String root = folder.getAbsolutePath() + "\\";
 
         for (final File fileEntry : folder.listFiles()) {
             if (fileEntry.isDirectory()) {
-                listFilesForFolder(fileEntry, search);
+                listFilesForFolder(fileEntry, search, extensionFilter);
             } else {
+                if (!validExtension(fileEntry.getName(), extensionFilter)) continue;
                 searchInFile(root + fileEntry.getName(), search);
             }
         }
+    }
+
+    /**
+     * Checa se a extensão do documento é válida
+     * @param String fileName
+     * @param String... filter
+     * @return boolean
+     */
+    private boolean validExtension(String fileName, String... filter) {
+        if (filter != null && filter.length > 0) {
+            // A barra dupla é necessária para que o Java compreenda que o "." é a chave para separar as strings
+            String extension = fileName.split("\\.")[1];
+            
+            for (int i = 0; i < filter.length; i ++) {
+                if (filter[i].contains(extension)) return true;
+            }
+
+            return false;
+        }
+
+        return true;
     }
 
     /**

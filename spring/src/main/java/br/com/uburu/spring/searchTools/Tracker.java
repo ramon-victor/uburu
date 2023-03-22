@@ -18,32 +18,34 @@ public class Tracker {
 
     /**
      * Retorna um objeto JSON contendo o nome dos arquivos e 
+     * @param String... extensionFilter filtro de extensões (opcional)
      * @return List<Criteria> 
      */
-    public List<Criteria> getFiles() {
+    public List<Criteria> getFiles(String... extensionFilter) {
         File file = new File(path);
-        return file.isDirectory() ? readFilesFolder() : readFile();
+        return file.isDirectory() ? readFilesFolder(extensionFilter) : readFile();
     }
 
     /**
      * Busca no diretório inteiro
+     * @param String... extensionFilter
      * @return List<Criteria>
      */
-    private List<Criteria> readFilesFolder() {
+    private List<Criteria> readFilesFolder(String... extensionFilter) {
         List<String> folders = filter.getValidFolders();
         String[] searchCriteria = filter.getSearchCriteria();
 
-        folders.forEach(folder -> {
-            try {
+        try {
+            for (String folder : folders) {
                 for (String search : searchCriteria) {
                     File folderFile = new File(folder);
-                    reader.listFilesForFolder(folderFile, search);
+                    reader.listFilesForFolder(folderFile, search, extensionFilter);
                 }
-            } catch (final Exception e) {
-                e.printStackTrace();
-                return;
             }
-        });
+        } catch (final Exception e) {
+            e.printStackTrace();
+            return null;
+        }
 
         return reader.getFiles();
     }
