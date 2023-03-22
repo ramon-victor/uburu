@@ -3,11 +3,15 @@ package br.com.uburu.spring.searchTools;
 import java.io.File;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Tracker {
 
     private String path;
     private SearchFilter filter;
     private Reader reader;
+    private Logger logger = LoggerFactory.getLogger(Tracker.class);
 
     public Tracker(String path, String searchCriteria) {
         this.path = path;
@@ -43,7 +47,7 @@ public class Tracker {
                 }
             }
         } catch (final Exception e) {
-            e.printStackTrace();
+            logger.error("Ocorreu um erro", e);
             return null;
         }
 
@@ -59,7 +63,7 @@ public class Tracker {
             String[] searchMatrix = filter.getSearchCriteria();
             reader.searchInFile(path, searchMatrix);
         } catch (final Exception e) {
-            e.printStackTrace();
+            logger.error("Ocorreu um erro: ", e);
             return null;
         }
 
