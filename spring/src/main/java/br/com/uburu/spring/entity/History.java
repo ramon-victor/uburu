@@ -17,6 +17,10 @@ public class History {
     private String repos;
     private Date date;
 
+    public long getId() {
+        return id;
+    }
+
     public String getKeyWords() {
         return keyWords;
     }

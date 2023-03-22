@@ -18,7 +18,7 @@ public class HistoryServiceImpl implements HistoryService {
 
     @Autowired
     private HistoryRepository repository;
-    private HistoryMapper mapper = Mappers.getMapper(HistoryMapper.class);;
+    private HistoryMapper mapper = Mappers.getMapper(HistoryMapper.class);
 
     @Override
     public List<HistoryDTO> getAll() {

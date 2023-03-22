@@ -3,8 +3,6 @@ package br.com.uburu.spring.searchTools;
 import java.io.File;
 import java.util.List;
 
-import org.json.JSONObject;
-
 public class Tracker {
 
     private String path;
@@ -20,18 +18,18 @@ public class Tracker {
 
     /**
      * Retorna um objeto JSON contendo o nome dos arquivos e 
-     * @return List<JSONObject> 
+     * @return List<Criteria> 
      */
-    public List<JSONObject> getFiles() {
+    public List<Criteria> getFiles() {
         File file = new File(path);
         return file.isDirectory() ? readFilesFolder() : readFile();
     }
 
     /**
      * Busca no diretório inteiro
-     * @return List<JSONObject>
+     * @return List<Criteria>
      */
-    private List<JSONObject> readFilesFolder() {
+    private List<Criteria> readFilesFolder() {
         List<String> folders = filter.getValidFolders();
         String[] searchCriteria = filter.getSearchCriteria();
 
@@ -52,9 +50,9 @@ public class Tracker {
 
     /**
      * Busca num arquivo específico
-     * @return List<JSONObject>
+     * @return List<Criteria>
      */
-    private List<JSONObject> readFile() {
+    private List<Criteria> readFile() {
         try {
             String[] searchMatrix = filter.getSearchCriteria();
             reader.searchInFile(path, searchMatrix);

@@ -25,14 +25,14 @@ public class HistoryController {
 
     @GetMapping
     public ResponseEntity<List<HistoryDTO>> getAll() {
-        List<HistoryDTO> cities = service.getAll();
-        return new ResponseEntity<List<HistoryDTO>>(cities, HttpStatus.OK);
+        List<HistoryDTO> history = service.getAll();
+        return new ResponseEntity<List<HistoryDTO>>(history, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<HistoryDTO> insertHistory(@RequestBody HistoryDTO history) {
         if (history.getId() == 0) {
-            service.save(history);
+            history = service.save(history);
             return new ResponseEntity<HistoryDTO>(history, HttpStatus.CREATED);
         }
 

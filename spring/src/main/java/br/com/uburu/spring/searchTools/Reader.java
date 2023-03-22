@@ -6,11 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.json.JSONObject;
-
 public class Reader {
 
-    private List<JSONObject> files;
+    private List<Criteria> files;
 
     public Reader() {
         files = new ArrayList<>();
@@ -49,9 +47,10 @@ public class Reader {
             String line = scanner.nextLine();
 
             if (line.contains(search)) {
-                final JSONObject foundFiles = new JSONObject();
-                foundFiles.put("filePath", fileName);
-                foundFiles.put("line", lineCount);
+                final Criteria foundFiles = new Criteria();
+                foundFiles.setKeyWords(search);
+                foundFiles.setRepos(fileName);
+                foundFiles.setLine(lineCount);
 
                 this.files.add(foundFiles);
             }
@@ -81,9 +80,10 @@ public class Reader {
                 String line = scanner.nextLine();
 
                 if (line.contains(s)) {
-                    final JSONObject foundFiles = new JSONObject();
-                    foundFiles.put("filePath", fileName);
-                    foundFiles.put("line", lineCount);
+                    final Criteria foundFiles = new Criteria();
+                    foundFiles.setKeyWords(s);
+                    foundFiles.setRepos(fileName);
+                    foundFiles.setLine(lineCount);
 
                     this.files.add(foundFiles);
                     constainsSearch = true;
@@ -106,7 +106,7 @@ public class Reader {
      * Retorna os arquivos encontrados
      * @return List<JSONObject>
      */
-    public List<JSONObject> getFiles() {
+    public List<Criteria> getFiles() {
         return files;
     }
 

@@ -1,6 +1,7 @@
 package br.com.uburu.spring;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +19,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 @SpringBootTest
@@ -36,16 +39,19 @@ class ApplicationTests {
 	private MockMvc mock;
 
 	@Test
-	void contextLoads() throws Exception {}
+	void contextLoads() {}
 
 	@Test
 	void historyControllerTest() throws Exception {
 		assertThat(historyController).isNotNull();
 
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date = formatter.format(new Date(System.currentTimeMillis()));
+
 		JSONObject history = new JSONObject();
 		history.put("keyWords", "Uburu");
 		history.put("repos", "src\\test\\java\\br\\com\\uburu\\spring\\searchTools\\test.txt");
-		history.put("date", new Date());
+		history.put("date", date);
 
 		MvcResult mvcResult = mock.perform(
 			post("/api/v1/history")
@@ -61,13 +67,33 @@ class ApplicationTests {
 		).andExpect(status().isOk());
 		
 		mock.perform(
-			delete("/api/v1/history/" + jsonObject.getString("id"))
+			delete("/api/v1/history/" + jsonObject.getLong("id"))
 		).andExpect(status().isAccepted());
 	}
 
 	@Test
 	void searchControllerTest() throws Exception {
 		assertThat(searchController).isNotNull();
+
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date = formatter.format(new Date(System.currentTimeMillis()));
+
+		JSONObject history = new JSONObject();
+		history.put("keyWords", "Uburu");
+		history.put("repos", "src\\test\\java\\br\\com\\uburu\\spring\\searchTools");
+		history.put("date", date);
+
+		MvcResult mvcResult = mock.perform(
+			post("/api/v1/search")
+			.content(history.toString())
+			.contentType(MediaType.APPLICATION_JSON)
+		).andExpect(status().isOk()).andReturn();
+
+		String result = mvcResult.getResponse().getContentAsString();
+		JSONArray jsonArray = new JSONArray(result);
+
+		assertThat(result).isNotNull();
+		assertTrue(jsonArray.length() > 0);
 	}
 
 }
