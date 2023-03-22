@@ -5,7 +5,7 @@ public class Criteria {
     private String keyWords;
     private String repos;
     private String extensionFilter;
-    private int line;
+    private boolean ignoreCase;
 
     public String getKeyWords() {
         return keyWords;
@@ -23,14 +23,6 @@ public class Criteria {
         this.repos = repos;
     }
 
-    public int getLine() {
-        return line;
-    }
-
-    public void setLine(int line) {
-        this.line = line;
-    }
-
     public String getExtensionFilter() {
         return extensionFilter;
     }
@@ -39,4 +31,12 @@ public class Criteria {
         this.extensionFilter = extensionFilter;
     }
 
+    public boolean shouldIgnoreCase() {
+        return ignoreCase;
+    }
+
+    public void setIgnoreCase(boolean ignoreCase) {
+        this.ignoreCase = ignoreCase;
+    }
+    
 }

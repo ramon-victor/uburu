@@ -8,20 +8,22 @@ import java.util.Scanner;
 
 public class Reader {
 
-    private List<Criteria> files;
+    private List<Result> files;
+    private boolean ignoreCase;
 
-    public Reader() {
+    public Reader(boolean ignoreCase) {
+        this.ignoreCase = ignoreCase;
         files = new ArrayList<>();
     }
 
     /**
      * Realiza a pesquisa em todos os arquivos de um determinado diretório
      * @param String folderName
-     * @param String search
+     * @param String[] search
      * @param String... extensionFilter
      * @throws FileNotFoundException
      */
-    public void listFilesForFolder(final File folder, String search, String... extensionFilter) throws FileNotFoundException {
+    public void listFilesForFolder(final File folder, String[] search, String... extensionFilter) throws FileNotFoundException {
         String root = folder.getAbsolutePath() + "\\";
 
         for (final File fileEntry : folder.listFiles()) {
@@ -41,6 +43,9 @@ public class Reader {
      * @return boolean
      */
     private boolean validExtension(String fileName, String... filter) {
+        // Validação de arquivos específicos, sem extensão
+        if (!fileName.contains(".")) return false;
+
         if (filter != null && filter.length > 0) {
             // A barra dupla é necessária para que o Java compreenda que o "." é a chave para separar as strings
             String extension = fileName.split("\\.")[1];
@@ -56,35 +61,6 @@ public class Reader {
     }
 
     /**
-     * Realiza a pesquisa em um arquivo específico
-     * @param String fileName
-     * @param String search
-     * @throws FileNotFoundException
-     */
-    public void searchInFile(String fileName, String search) throws FileNotFoundException {
-        final File file = new File(fileName);
-        final Scanner scanner = new Scanner(file);
-
-        int lineCount = 0;
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-
-            if (line.contains(search)) {
-                final Criteria foundFiles = new Criteria();
-                foundFiles.setKeyWords(search);
-                foundFiles.setRepos(fileName);
-                foundFiles.setLine(lineCount);
-
-                this.files.add(foundFiles);
-            }
-            
-            lineCount ++;
-        }
-
-        scanner.close();
-    }
-
-    /**
      * Realiza a pesquisa em um arquivo específico quando há mais de um termo de pesquisa
      * @param String fileName
      * @param String... search
@@ -94,50 +70,43 @@ public class Reader {
         final File file = new File(fileName);
         final Scanner scanner = new Scanner(file);
 
-        boolean containsAllCriteria = true;
-        for (String s : search) {
-            boolean constainsSearch = false;
-
-            int lineCount = 0;
-            while (scanner.hasNextLine() && !constainsSearch) {
-                String line = scanner.nextLine();
+        // Contar a quantidade de arquivos que forem encontrados
+        int lineCount = 1;
+        while (scanner.hasNextLine()) {
+            List<Result> list = new ArrayList<>();
+            
+            String line = scanner.nextLine();
+            for (String s : search) {
+                if (ignoreCase) {
+                    line = line.toLowerCase();
+                    s = s.toLowerCase();
+                }
 
                 if (line.contains(s)) {
-                    final Criteria foundFiles = new Criteria();
+                    final Result foundFiles = new Result();
                     foundFiles.setKeyWords(s);
                     foundFiles.setRepos(fileName);
                     foundFiles.setLine(lineCount);
 
-                    this.files.add(foundFiles);
-                    constainsSearch = true;
+                    list.add(foundFiles);
+                    lineCount ++;
                 }
-
-                lineCount ++;
             }
 
-            containsAllCriteria &= constainsSearch;
+            if (search.length == list.size()) {
+                files.addAll(list);
+            }
         }
 
         scanner.close();
-
-        if (!containsAllCriteria) {
-            clearFilesList();
-        }
     }
 
     /**
      * Retorna os arquivos encontrados
      * @return List<JSONObject>
      */
-    public List<Criteria> getFiles() {
+    public List<Result> getFiles() {
         return files;
-    }
-
-    /**
-     * Limpa a lista de arquivos
-     */
-    public void clearFilesList() {
-        files.clear();
     }
 
 }

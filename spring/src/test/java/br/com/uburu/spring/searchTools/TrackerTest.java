@@ -17,7 +17,7 @@ public class TrackerTest {
         String path = file.getAbsolutePath();
         String search = "Uburu AND utilizada";
 
-        tracker = new Tracker(path, search);
+        tracker = new Tracker(path, search, true);
         var files = tracker.getFiles();
 
         assertNotNull(files);
@@ -29,7 +29,7 @@ public class TrackerTest {
         String path = file.getAbsolutePath();
         String search = "Uburu AND utilizada";
 
-        tracker = new Tracker(path, search);
+        tracker = new Tracker(path, search, true);
         var files = tracker.getFiles();
 
         assertNotNull(files);
@@ -42,11 +42,11 @@ public class TrackerTest {
         String search = "Uburu AND utilizada";
         String filter = "txt";
 
-        tracker = new Tracker(path, search);
+        tracker = new Tracker(path, search, true);
         var files = tracker.getFiles(filter);
 
         assertNotNull(files);
-        for (Criteria f : files) {
+        for (Result f : files) {
             assertTrue(f.getRepos().endsWith(filter));
         }
     }

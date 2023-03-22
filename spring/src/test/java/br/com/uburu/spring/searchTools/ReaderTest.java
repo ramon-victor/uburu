@@ -2,11 +2,9 @@ package br.com.uburu.spring.searchTools;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +15,7 @@ public class ReaderTest {
 
     @BeforeEach
     void setUp() {
-        reader = new Reader();
+        reader = new Reader(true);
         magicSearchCriteria = "Uburu";
     }
 
@@ -54,15 +52,9 @@ public class ReaderTest {
         assert reader != null;
 
         final File file = new File("src\\test\\java\\br\\com\\uburu\\spring\\searchTools");
-        reader.listFilesForFolder(file, magicSearchCriteria);
+        reader.listFilesForFolder(file, new String[]{magicSearchCriteria});
 
         assertFalse(reader.getFiles().isEmpty());
-    }
-
-    @AfterEach
-    void clearFiles() {
-        reader.clearFilesList();
-        assertTrue(reader.getFiles().isEmpty());
     }
     
 }

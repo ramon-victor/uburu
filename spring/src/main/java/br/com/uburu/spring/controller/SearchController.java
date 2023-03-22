@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.searchTools.Criteria;
+import br.com.uburu.spring.searchTools.Result;
 import br.com.uburu.spring.searchTools.Tracker;
 
 @RestController
@@ -18,14 +19,14 @@ import br.com.uburu.spring.searchTools.Tracker;
 public class SearchController {
 
     @PostMapping @GetMapping
-    public ResponseEntity<List<Criteria>> search(@RequestBody Criteria criteria) {
+    public ResponseEntity<List<Result>> search(@RequestBody Criteria criteria) {
         String path = criteria.getRepos();
         String search = criteria.getKeyWords();
 
-        final Tracker tracker = new Tracker(path, search);
-        List<Criteria> result = tracker.getFiles();
+        final Tracker tracker = new Tracker(path, search, criteria.shouldIgnoreCase());
+        List<Result> result = tracker.getFiles();
 
-        return new ResponseEntity<List<Criteria>>(result, HttpStatus.OK);
+        return new ResponseEntity<List<Result>>(result, HttpStatus.OK);
     }
     
 }

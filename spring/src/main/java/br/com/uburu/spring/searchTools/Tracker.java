@@ -13,11 +13,11 @@ public class Tracker {
     private Reader reader;
     private Logger logger = LoggerFactory.getLogger(Tracker.class);
 
-    public Tracker(String path, String searchCriteria) {
+    public Tracker(String path, String searchCriteria, boolean ignoreCase) {
         this.path = path;
 
         filter = new SearchFilter(path, searchCriteria);
-        reader = new Reader();
+        reader = new Reader(ignoreCase);
     }
 
     /**
@@ -25,7 +25,7 @@ public class Tracker {
      * @param String... extensionFilter filtro de extensões (opcional)
      * @return List<Criteria> 
      */
-    public List<Criteria> getFiles(String... extensionFilter) {
+    public List<Result> getFiles(String... extensionFilter) {
         File file = new File(path);
         return file.isDirectory() ? readFilesFolder(extensionFilter) : readFile();
     }
@@ -35,16 +35,13 @@ public class Tracker {
      * @param String... extensionFilter
      * @return List<Criteria>
      */
-    private List<Criteria> readFilesFolder(String... extensionFilter) {
+    private List<Result> readFilesFolder(String... extensionFilter) {
         List<String> folders = filter.getValidFolders();
-        String[] searchCriteria = filter.getSearchCriteria();
 
         try {
             for (String folder : folders) {
-                for (String search : searchCriteria) {
-                    File folderFile = new File(folder);
-                    reader.listFilesForFolder(folderFile, search, extensionFilter);
-                }
+                File folderFile = new File(folder);
+                reader.listFilesForFolder(folderFile, filter.getSearchCriteria(), extensionFilter);
             }
         } catch (final Exception e) {
             logger.error("Ocorreu um erro", e);
@@ -58,7 +55,7 @@ public class Tracker {
      * Busca num arquivo específico
      * @return List<Criteria>
      */
-    private List<Criteria> readFile() {
+    private List<Result> readFile() {
         try {
             String[] searchMatrix = filter.getSearchCriteria();
             reader.searchInFile(path, searchMatrix);
