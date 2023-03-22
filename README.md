@@ -1,5 +1,7 @@
 # Uburu
 
+[Uburu]()
+
 ## 1. Contexto do projeto
 
 O projeto de software proposto tem como objetivo resolver um problema comum no desenvolvimento de software: a duplicação de código. Esse problema aumenta a complexidade do sistema e gera arquivos inúteis, o que pode afetar negativamente a eficiência e a qualidade do software.
@@ -25,7 +27,7 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 1. O aplicativo deve manter um registro do histórico de pesquisa para que o usuário possa acessar facilmente pesquisas anteriores.
 
 ### 2.2. Requisitos não funcionais
-1. O aplicativo deve ser rápido e eficiente na pesquisa e retorno dos resultados.
+1. O aplicativo deve ser eficiente na pesquisa e retorno dos resultados.
 1. O aplicativo deve ser fácil de usar, com uma interface intuitiva e amigável para o usuário.
 1. O aplicativo deve ser capaz de lidar com grandes quantidades de dados e arquivos sem falhas ou erros.
 1. O aplicativo deve ser seguro e proteger a privacidade dos usuários, não acessando arquivos sem permissão e não coletando dados pessoais sem consentimento explícito.
