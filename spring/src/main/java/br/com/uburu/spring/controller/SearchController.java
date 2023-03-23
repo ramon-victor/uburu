@@ -24,7 +24,7 @@ public class SearchController {
         String search = criteria.getKeyWords();
 
         final Tracker tracker = new Tracker(path, search, criteria.shouldIgnoreCase());
-        List<Result> result = tracker.getFiles();
+        List<Result> result = tracker.getFiles(criteria.getExtensionFilter());
 
         return new ResponseEntity<List<Result>>(result, HttpStatus.OK);
     }

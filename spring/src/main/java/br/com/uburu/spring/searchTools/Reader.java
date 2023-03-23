@@ -43,7 +43,6 @@ public class Reader {
      * @return boolean
      */
     private boolean validExtension(String fileName, String... filter) {
-        // Validação de arquivos específicos, sem extensão
         if (!fileName.contains(".")) return false;
 
         if (filter != null && filter.length > 0) {
@@ -51,7 +50,8 @@ public class Reader {
             String extension = fileName.split("\\.")[1];
             
             for (int i = 0; i < filter.length; i ++) {
-                if (filter[i].contains(extension)) return true;
+                // Validação para filtros vazios
+                if (filter[i] == null || filter[i].contains(extension)) return true;
             }
 
             return false;
