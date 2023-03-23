@@ -9,7 +9,7 @@ Como a pasta node_modules contém muitos arquivos para serem enviados para o Git
 1. Acessar o projeto creat com o comando `cd app`
 1. Rodar o comando `npm i electron` para baixar o electron
     - Caso hajam mais dependências, o comando `npm i <dependencia>` deve servir
-1. Fazer um git pull no projeto do github para puxar as alterações
+1. Fazer um `git pull` no projeto do github para puxar as alterações
 
 #### OBS.: Necessário possui o npm e o node.js
 
