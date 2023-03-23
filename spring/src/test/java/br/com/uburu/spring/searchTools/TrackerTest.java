@@ -15,7 +15,7 @@ public class TrackerTest {
     void getFilesTest() {
         final File file = new File("src\\test\\java\\br\\com\\uburu\\spring\\searchTools\\test.txt");
         String path = file.getAbsolutePath();
-        String search = "Uburu AND utilizada";
+        String search = "\"Uburu \" & utilizada";
 
         tracker = new Tracker(path, search, true);
         var files = tracker.getFiles();
@@ -27,7 +27,7 @@ public class TrackerTest {
     void getFilesFolderTest() {
         final File file = new File("src\\test\\java\\br\\com\\uburu\\spring\\searchTools");
         String path = file.getAbsolutePath();
-        String search = "Uburu AND utilizada";
+        String search = "Uburu & utilizada";
 
         tracker = new Tracker(path, search, true);
         var files = tracker.getFiles();
@@ -39,7 +39,7 @@ public class TrackerTest {
     void getFilesFolderWithExtensionFilterTest() {
         final File file = new File("src\\test\\java\\br\\com\\uburu\\spring\\searchTools");
         String path = file.getAbsolutePath();
-        String search = "Uburu AND utilizada";
+        String search = "Uburu & utilizada";
         String filter = "txt";
 
         tracker = new Tracker(path, search, true);

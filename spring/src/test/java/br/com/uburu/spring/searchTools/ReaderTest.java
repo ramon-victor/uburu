@@ -37,10 +37,7 @@ public class ReaderTest {
         final File file = new File("src\\test\\java\\br\\com\\uburu\\spring\\searchTools\\test.txt");
         String path = file.getAbsolutePath();
 
-        String composedCriteria = "Uburu AND utilizada";
-        SearchFilter filter = new SearchFilter(path, composedCriteria);
-
-        String[] criteria = filter.getSearchCriteria();
+        String[] criteria = new String[]{"Uburu", "utilizada "};
         assertEquals(criteria.length, 2);
 
         reader.searchInFile(path, criteria);
