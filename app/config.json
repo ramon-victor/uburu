@@ -1,0 +1,11 @@
+{
+    "window": {
+        "fullScreen": false,
+        "hideMenuBar": true
+    },
+
+    "webPreferences": {
+        "devTools": false,
+        "nodeIntegration": false
+    }
+}
