@@ -27,7 +27,7 @@ public class Tracker {
      * @return List<Criteria> 
      */
     public List<Result> getFiles(String... extensionFilter) {
-        List<String> folders = splitFolders(path);;
+        List<String> folders = splitFolders(path);
 
         try {
             for (String path : folders) {

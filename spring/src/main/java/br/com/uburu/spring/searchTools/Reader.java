@@ -3,6 +3,7 @@ package br.com.uburu.spring.searchTools;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -45,19 +46,11 @@ public class Reader {
     private boolean validExtension(String fileName, String... filter) {
         if (!fileName.contains(".")) return false;
 
-        if (filter != null && filter.length > 0) {
-            // A barra dupla é necessária para que o Java compreenda que o "." é a chave para separar as strings
-            String extension = fileName.split("\\.")[1];
-            
-            for (int i = 0; i < filter.length; i ++) {
-                // Validação para filtros vazios
-                if (filter[i] == null || filter[i].contains(extension)) return true;
-            }
+        // A barra dupla é para o Java entender que o "." é uma string
+        String extension = fileName.split("\\.")[1];
+        List<String> filters = Arrays.asList(filter);
 
-            return false;
-        }
-
-        return true;
+        return filters.contains(extension) || filters.contains(null);
     }
 
     /**
