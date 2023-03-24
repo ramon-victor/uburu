@@ -50,7 +50,7 @@ public class Reader {
         String extension = fileName.split("\\.")[1];
         List<String> filters = Arrays.asList(filter);
 
-        return filters.contains(extension) || filters.contains(null);
+        return filters.contains(extension) || filters.contains(null) || filters.isEmpty();
     }
 
     /**
