@@ -16,7 +16,7 @@ function createWindow() {
     autoHideMenuBar: windowConf.hideMenuBar,
     webPreferences,
     icon: icon,
-    show: false 
+    show: false
   });
 
   // Endereço do React
