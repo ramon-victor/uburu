@@ -1,4 +1,4 @@
-import 'jquery';
+import $ from 'jquery';
 
 const sendRequest = (url, method, params) => {
     return $.ajax(url, {
@@ -17,7 +17,7 @@ sendRequest('url', 'POST', {
     int: 10
 }).then((success) => {
     if (success) {
-        console.log("Success");
+        console.log(success);
     }
 });
 */

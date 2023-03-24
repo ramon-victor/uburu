@@ -57,5 +57,6 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 - React
 - Electron
 - JQuery
+- Concurrently
 
 ## 7. Arquitetura dos canais de comunicação das APIs
