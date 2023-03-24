@@ -15,7 +15,8 @@ function createWindow() {
     height: 600,
     autoHideMenuBar: windowConf.hideMenuBar,
     webPreferences,
-    icon: icon
+    icon: icon,
+    show: false 
   });
 
   // Endereço do React
@@ -26,6 +27,11 @@ function createWindow() {
 
   // Open the DevTools.
   if (webPreferences.devTools) mainWindow.webContents.openDevTools();
+
+  // Aguardar o evento 'ready-to-show' antes de exibir a janela
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 }
 
 app.whenReady().then(() => {
