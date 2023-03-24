@@ -4,7 +4,7 @@ const path = require('path');
 const config = require(path.join(__dirname + '/config.json'));
 const icon = path.join(__dirname + '/public/favicon.ico');
 
-function createWindow () {
+function createWindow() {
   const windowConf = config.window;
   const webPreferences = config.webPreferences;
   webPreferences.preload = path.join(__dirname, 'preload.js');
@@ -29,7 +29,7 @@ function createWindow () {
 }
 
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

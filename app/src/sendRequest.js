@@ -10,7 +10,7 @@ const sendRequest = (url, method, params) => {
 /*
 Exemplo de utilização:
 
-import sendRequest from './callAPI';
+import sendRequest from './sendRequest';
 
 sendRequest('url', 'POST', {
     string: "string",
