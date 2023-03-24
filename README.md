@@ -1,6 +1,6 @@
 # Uburu
 
-![Uburu](https://github.com/Dheovani/Uburu/blob/main/uburu.png)
+![Uburu](./uburu.png)
 
 ## 1. Contexto do projeto
 
