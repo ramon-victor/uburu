@@ -8,15 +8,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class History {
+public class Keyword {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String keyWords;
-    private String repos;
     private Date date;
-
+    
     public long getId() {
         return id;
     }
@@ -29,14 +28,6 @@ public class History {
         this.keyWords = keyWords;
     }
 
-    public String getRepos() {
-        return repos;
-    }
-
-    public void setRepos(String repos) {
-        this.repos = repos;
-    }
-
     public Date getDate() {
         return date;
     }
@@ -44,5 +35,5 @@ public class History {
     public void setDate(Date date) {
         this.date = date;
     }
-    
+
 }

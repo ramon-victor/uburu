@@ -37,24 +37,25 @@ class ApplicationTests {
 
 	@Autowired
 	private MockMvc mock;
+	private String date;
 
 	@Test
-	void contextLoads() {}
-
-	@Test
-	void historyControllerTest() throws Exception {
+	void contextLoads() {
 		assertThat(historyController).isNotNull();
+		assertThat(searchController).isNotNull();
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String date = formatter.format(new Date(System.currentTimeMillis()));
+		date = formatter.format(new Date(System.currentTimeMillis()));
+	}
 
+	@Test
+	void filterHistoryTest() throws Exception {
 		JSONObject history = new JSONObject();
-		history.put("keyWords", "Uburu");
-		history.put("repos", "src\\test\\java\\br\\com\\uburu\\spring\\searchTools\\test.txt");
+		history.put("extensionFilter", "txt, php, java");
 		history.put("date", date);
 
 		MvcResult mvcResult = mock.perform(
-			post("/api/v1/history")
+			post("/api/v1/history/filter")
 			.content(history.toString())
 			.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(status().isCreated()).andReturn();
@@ -63,11 +64,59 @@ class ApplicationTests {
 		JSONObject jsonObject = new JSONObject(result);
 
 		mock.perform(
-			get("/api/v1/history")
+			get("/api/v1/history/filter")
 		).andExpect(status().isOk());
 		
 		mock.perform(
-			delete("/api/v1/history/" + jsonObject.getLong("id"))
+			delete("/api/v1/history/filter/" + jsonObject.getLong("id"))
+		).andExpect(status().isAccepted());
+	}
+
+	@Test
+	void keywordHistoryTest() throws Exception {
+		JSONObject history = new JSONObject();
+		history.put("keyWords", "Uburu & \" utilizada \"");
+		history.put("date", date);
+
+		MvcResult mvcResult = mock.perform(
+			post("/api/v1/history/keyword")
+			.content(history.toString())
+			.contentType(MediaType.APPLICATION_JSON)
+		).andExpect(status().isCreated()).andReturn();
+
+		String result = mvcResult.getResponse().getContentAsString();
+		JSONObject jsonObject = new JSONObject(result);
+
+		mock.perform(
+			get("/api/v1/history/keyword")
+		).andExpect(status().isOk());
+		
+		mock.perform(
+			delete("/api/v1/history/keyword/" + jsonObject.getLong("id"))
+		).andExpect(status().isAccepted());
+	}
+
+	@Test
+	void pathHistoryTest() throws Exception {
+		JSONObject history = new JSONObject();
+		history.put("path", "src\\test\\java\\br\\com\\uburu\\spring");
+		history.put("date", date);
+
+		MvcResult mvcResult = mock.perform(
+			post("/api/v1/history/path")
+			.content(history.toString())
+			.contentType(MediaType.APPLICATION_JSON)
+		).andExpect(status().isCreated()).andReturn();
+
+		String result = mvcResult.getResponse().getContentAsString();
+		JSONObject jsonObject = new JSONObject(result);
+
+		mock.perform(
+			get("/api/v1/history/path")
+		).andExpect(status().isOk());
+		
+		mock.perform(
+			delete("/api/v1/history/path/" + jsonObject.getLong("id"))
 		).andExpect(status().isAccepted());
 	}
 
