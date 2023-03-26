@@ -37,7 +37,7 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 ## 3. Diagrama de casos de uso
 
 ## 4. Diagrama de classes
-
+![UburuUseCase](./useCaseUburu.svg)
 ## 5. Definição de tecnologias
 
 ### 5.1. Springboot
