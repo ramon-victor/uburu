@@ -35,7 +35,7 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 1. Ao menos 70% do código deve ser cobrido por testes unitários.
 
 ## 3. Diagrama de casos de uso
-
+![UburuUseCase](./useCaseUburu.svg)
 ## 4. Diagrama de classes
 ![Search-Engine](./Diagrama%20de%20classes%20-%20Search%20Engine.png)
 
@@ -53,6 +53,12 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 1. Grande comunidade: O Electron JS é uma framework open-source com uma grande comunidade de desenvolvedores ativos. Isso significa que há uma grande quantidade de recursos disponíveis, incluindo documentação, bibliotecas e exemplos de código, o que facilita o desenvolvimento de aplicativos.
 1. Funcionalidades nativas: O Electron JS permite que os desenvolvedores criem aplicativos para desktop com funcionalidades nativas, como acesso a arquivos locais, notificações e integração com o sistema operacional. Isso permite que os aplicativos criados com o Electron JS tenham um desempenho semelhante ao de aplicativos nativos.
 
+### 5.3 React JS
+1. O React permite a criação de componentes reutilizáveis que facilitam o desenvolvimento e manutenção do código, tornando-o mais escalável e modular.
+1. O React utiliza o fluxo de dados unidirecional, o que significa que a comunicação entre os componentes é clara e fácil de entender, tornando o código mais fácil de depurar.
+1. O React é altamente flexível e pode ser usado com outras bibliotecas e frameworks, permitindo a integração com diferentes plataformas e tecnologias.
+1. O React tem uma grande comunidade de desenvolvedores ativos, com muitos recursos disponíveis, como bibliotecas de componentes e ferramentas de desenvolvimento.
+
 ## 6. Dependências do projeto
 - Node.js & npm
 - React
@@ -60,4 +66,6 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 - JQuery
 - Concurrently
 
-## 7. Arquitetura dos canais de comunicação das APIs
+## 7. Canais de comunicação das APIs
+- **{project_location}/api/v1/search**: API de busca dos arquivos
+- **{project_location}/api/v1/history**: Registra o histórico de dados de todos os campos de texto (filtros, pastas e palavras buscadas)
