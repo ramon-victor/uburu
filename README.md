@@ -66,5 +66,5 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 - Concurrently
 
 ## 7. Canais de comunicação das APIs
-- **{project_location}/api/v1/search** => API de busca dos arquivos
-- **{project_location}/api/v1/history** => Registra o histórico de dados de todos os campos de texto (filtros, pastas e palavras buscadas)
+- **{project_location}/api/v1/search**: API de busca dos arquivos
+- **{project_location}/api/v1/history**: Registra o histórico de dados de todos os campos de texto (filtros, pastas e palavras buscadas)
