@@ -36,6 +36,7 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 
 ## 3. Diagrama de casos de uso
 ![UburuUseCase](./useCaseUburu.svg)
+
 ## 4. Diagrama de classes
 ![Search-Engine](./Diagrama%20de%20classes%20-%20Search%20Engine.png)
 
