@@ -1,59 +1,46 @@
 package br.com.uburu.spring.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.uburu.spring.dto.PathDTO;
-import br.com.uburu.spring.entity.Path;
-import br.com.uburu.spring.mapper.PathMapper;
+import br.com.uburu.spring.document.Path;
 import br.com.uburu.spring.repository.PathRepository;
 import br.com.uburu.spring.service.PathService;
 
 @Service
 public class PathServiceImpl implements PathService {
 
+    private final PathRepository repository;
+
     @Autowired
-    private PathRepository repository;
-    private PathMapper mapper = Mappers.getMapper(PathMapper.class);
-
-    @Override
-    public List<PathDTO> getAll() {
-        List<Path> paths = repository.findAll();
-        return mapper.mapListPath(paths);
+    public PathServiceImpl(PathRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public PathDTO findById(long id) {
-        Optional<Path> path = repository.findById(id);
+    public List<Path> getAll() {
+        List<Path> paths = new ArrayList<>();
+        repository.findAll().forEach(paths::add);
 
-        if (path.isPresent()) {
-            Path entity = path.get();
-            return mapper.mapPath(entity);
-        }
-
-        return null;
+        return paths;
     }
 
     @Override
-    public PathDTO save(PathDTO path) {
-        Path entity = mapper.mapPathDTO(path);
-        repository.save(entity);
+    public Path findById(long id) {
+        return repository.findById(id).orElse(null);
+    }
 
-        return mapper.mapPath(entity);
+    @Override
+    public Path save(Path path) {
+        return repository.save(path);
     }
 
     @Override
     public void delete(long id) {
-        Optional<Path> pathEntity = repository.findById(id);
-
-        if (pathEntity.isPresent()) {
-            Path path = pathEntity.get();
-            repository.delete(path);
-        }
+        repository.deleteById(id);
     }
     
 }

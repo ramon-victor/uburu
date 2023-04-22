@@ -1,9 +1,7 @@
 package br.com.uburu.spring.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import br.com.uburu.spring.entity.Path;
+import br.com.uburu.spring.document.Path;
 
-@Repository
-public interface PathRepository extends JpaRepository<Path, Long> {}
+public interface PathRepository extends ElasticsearchRepository<Path, Long> {}

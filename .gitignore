@@ -29,6 +29,9 @@ build/
 ### Java ###
 LocalDeadlyTest.java
 
+### Elasticsearch ###
+elasticsearch-8.7.0/
+
 ### dependencies ###
 node_modules
 .pnp

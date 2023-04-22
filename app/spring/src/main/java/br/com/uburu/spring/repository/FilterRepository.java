@@ -1,9 +1,7 @@
 package br.com.uburu.spring.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-import br.com.uburu.spring.entity.Filter;
+import br.com.uburu.spring.document.Filter;
 
-@Repository
-public interface FilterRepository extends JpaRepository<Filter, Long> {}
+public interface FilterRepository extends ElasticsearchRepository<Filter, Long> {}
