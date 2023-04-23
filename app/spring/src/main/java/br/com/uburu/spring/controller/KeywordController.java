@@ -21,12 +21,8 @@ import br.com.uburu.spring.service.KeywordService;
 @RequestMapping("/api/v1/keyword")
 public class KeywordController {
 
-    private final KeywordService service;
-
     @Autowired
-    public KeywordController(KeywordService service) {
-        this.service = service;
-    }
+    private KeywordService service;
 
     @GetMapping
     public ResponseEntity<List<Keyword>> getAll() {

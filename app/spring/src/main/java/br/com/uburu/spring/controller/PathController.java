@@ -21,12 +21,8 @@ import br.com.uburu.spring.service.PathService;
 @RequestMapping("/api/v1/path")
 public class PathController {
 
-    private final PathService service;
-
     @Autowired
-    public PathController(PathService service) {
-        this.service = service;
-    }
+    private PathService service;
 
     @GetMapping
     public ResponseEntity<List<Path>> getAll() {

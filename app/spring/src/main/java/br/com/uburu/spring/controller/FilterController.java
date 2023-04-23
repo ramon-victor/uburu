@@ -21,12 +21,8 @@ import br.com.uburu.spring.service.FilterService;
 @RequestMapping("/api/v1/filter")
 public class FilterController {
 
-    private final FilterService service;
-
     @Autowired
-    public FilterController(FilterService service) {
-        this.service = service;
-    }
+    private FilterService service;
 
     @GetMapping
     public ResponseEntity<List<Filter>> getAll() {
