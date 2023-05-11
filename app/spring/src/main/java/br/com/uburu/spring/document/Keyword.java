@@ -10,7 +10,7 @@ import org.springframework.data.elasticsearch.annotations.Setting;
 
 import br.com.uburu.spring.utils.Indices;
 
-@Document(indexName = Indices.FILTER)
+@Document(indexName = Indices.KEYWORD)
 @Setting(settingPath = "static/es-setting.json")
 public class Keyword {
 
