@@ -13,21 +13,19 @@ class Input extends Component {
             repositories: [],
             selected: false
         };
-
-        this.apiPath = "";
-    }
-
-    componentDidMount() {
-        this.updateHistory();
     }
 
     // Busca o historico do input
-    updateHistory() {
+    updateHistory(path) {
 		var self = this;
         
-        sendHttpRequest("GET", this.apiPath).then((responseData) => {
-			self.setState({ repositories: responseData });  
-		});
+        sendHttpRequest("GET", "http://localhost:8080" + path)
+            .then(data => {
+                self.setState({ repositories: data });
+            })
+            .catch(err => {
+                console.error(`An error occurred! ${err}`);
+            });
     }
 
     setContent(content) {

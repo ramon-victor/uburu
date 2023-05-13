@@ -3,8 +3,7 @@ import Input from "./Input";
 class KeywordInput extends Input {
 
     componentDidMount() {
-        this.apiPath = "localhost:8080/api/v1/keyword";
-        super.componentDidMount();
+        this.updateHistory("/api/v1/keyword");
     }
 
     render() {
@@ -20,7 +19,7 @@ class KeywordInput extends Input {
                     type="text"
                     name={title}
                     id={title}
-                    value={this.state.input}
+                    defaultValue={this.state.input}
                     onClick={() => {this.setSelected()}} />
                 <div>
                 {

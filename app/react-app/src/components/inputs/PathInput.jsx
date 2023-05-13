@@ -1,10 +1,20 @@
+import React from "react";
 import Input from "./Input";
 
 class PathInput extends Input {
 
+    constructor(props) {
+        super(props);
+        this.state.subFolders = true;
+    }
+
     componentDidMount() {
-        this.apiPath = "localhost:8080/api/v1/path";
-        super.componentDidMount();
+        this.updateHistory("/api/v1/path");
+    }
+
+    handleSubFolders() {
+        const subFolders = !this.state.subFolders;
+        this.setState({ subFolders });
     }
 
     render() {
@@ -20,14 +30,22 @@ class PathInput extends Input {
                     type="text"
                     name={title}
                     id={title}
-                    value={this.state.input}
+                    defaultValue={this.state.input}
                     onClick={() => {this.setSelected()}} />
+
+                <input
+                    type="checkbox"
+                    name="subfolders"
+                    id="subfolders"
+                    onClick={() => {this.handleSubFolders()}} />
+                <label htmlFor="subfolders">Subfolders</label>
+
                 <div>
-                {
-                    selected && repositories?.map((item, index) => (
-                        <p key={index}>{item.name}</p>
-                    ))
-                }
+                    {
+                        selected && repositories?.map((item, index) => (
+                            <p key={index}>{item.name}</p>
+                        ))
+                    }
                 </div>
             </>
         );
