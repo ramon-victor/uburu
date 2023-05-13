@@ -28,7 +28,7 @@ import br.com.uburu.spring.service.FileService;
 /**
  * Classe responsável pela criação dos índices
  */
-public class Indexer {
+public final class Indexer {
 
     @Autowired
     private FileService service;
@@ -80,7 +80,7 @@ public class Indexer {
      * @param String path
      */
     public void index(final String path) {
-        File folder = new File(path);
+        final File folder = new File(path);
         index(folder);
     }
     

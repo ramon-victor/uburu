@@ -28,6 +28,10 @@ public class FileService {
     @Autowired
     private FileRepository repository;
 
+    public List<File> search(List<String> keywords) {
+        return null;
+    }
+
     public File getFile(long id) {
         return repository.findById(id).orElse(null);
     }
