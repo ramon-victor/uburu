@@ -8,8 +8,7 @@ class FilterInput extends Input {
 
     render() {
         const title = this.state.title;
-        const selected = this.state.selected;
-        const repositories = this.state.repositories;
+        const selected = this.state.selected && this.state.repositories.length >= 1;
         this.outClickListener(title);
 
         return (
@@ -21,13 +20,8 @@ class FilterInput extends Input {
                     id={title}
                     defaultValue={this.state.input}
                     onClick={() => {this.setSelected()}} />
-                <div>
-                {
-                    selected && repositories?.map((item, index) => (
-                        <p key={index}>{item.name}</p>
-                    ))
-                }
-                </div>
+                
+                { selected && this.renderHistory() }
             </>
         );
     }

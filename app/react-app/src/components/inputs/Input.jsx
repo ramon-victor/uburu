@@ -50,6 +50,20 @@ class Input extends Component {
         });
     }
 
+    renderHistory() {
+        const repositories = this.state.repositories;
+
+        return (
+            <select name="select" id="select">
+                {
+                    repositories.map((item, index) => (
+                        <option key={index} value={item.name}>{item.name}</option>
+                    ))
+                }
+            </select>
+        );
+    }
+
     render() {
         return (<></>);
     }

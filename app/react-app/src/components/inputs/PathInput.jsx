@@ -15,12 +15,11 @@ class PathInput extends Input {
     handleSubFolders() {
         const subFolders = !this.state.subFolders;
         this.setState({ subFolders });
-    }
+    }      
 
     render() {
         const title = this.state.title;
-        const selected = this.state.selected;
-        const repositories = this.state.repositories;
+        const selected = this.state.selected && this.state.repositories.length >= 1;
         this.outClickListener(title);
 
         return (
@@ -40,13 +39,7 @@ class PathInput extends Input {
                     onClick={() => {this.handleSubFolders()}} />
                 <label htmlFor="subfolders">Subfolders</label>
 
-                <div>
-                    {
-                        selected && repositories?.map((item, index) => (
-                            <p key={index}>{item.name}</p>
-                        ))
-                    }
-                </div>
+                { selected && this.renderHistory() }
             </>
         );
     }
