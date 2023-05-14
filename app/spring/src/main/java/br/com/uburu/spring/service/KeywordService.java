@@ -35,16 +35,8 @@ public class KeywordService {
         return keywords;
     }
 
-    public Keyword findById(long id) {
-        return repository.findById(id).orElse(null);
-    }
-
     public Keyword save(Keyword keyword) {
         return repository.save(keyword);
-    }
-
-    public void delete(long id) {
-        repository.deleteById(id);
     }
     
 }

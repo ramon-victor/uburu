@@ -34,16 +34,8 @@ public class FilterService {
         return filters;
     }
 
-    public Filter findById(long id) {
-        return repository.findById(id).orElse(null);
-    }
-
     public Filter save(Filter filter) {
         return repository.save(filter);
-    }
-
-    public void delete(long id) {
-        repository.deleteById(id);
     }
     
 }

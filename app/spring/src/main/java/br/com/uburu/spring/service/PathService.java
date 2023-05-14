@@ -35,16 +35,8 @@ public class PathService {
         return paths;
     }
 
-    public Path findById(long id) {
-        return repository.findById(id).orElse(null);
-    }
-
     public Path save(Path path) {
         return repository.save(path);
-    }
-
-    public void delete(long id) {
-        repository.deleteById(id);
     }
     
 }
