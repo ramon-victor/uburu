@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "./Input";
+import { sendHttpRequest } from "../../utils/sendRequest";
 
 class PathInput extends Input {
 
@@ -15,7 +16,17 @@ class PathInput extends Input {
     handleSubFolders() {
         const subFolders = !this.state.subFolders;
         this.setState({ subFolders });
-    }      
+    }
+
+    selectPath() {
+        sendHttpRequest("GET", "http://localhost:8080/api/v1/path/select")
+        .then(data => {
+            this.setState({ input: data.path });
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }
 
     render() {
         const title = this.state.title;
@@ -29,8 +40,12 @@ class PathInput extends Input {
                     type="text"
                     name={title}
                     id={title}
-                    defaultValue={this.state.input}
+                    value={this.state.input}
                     onClick={() => {this.setSelected()}} />
+
+                <button className="select-path" onClick={() => this.selectPath()}>
+                    Select path
+                </button>
 
                 <input
                     type="checkbox"

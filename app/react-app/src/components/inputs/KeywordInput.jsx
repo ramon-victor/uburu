@@ -18,7 +18,7 @@ class KeywordInput extends Input {
                     type="text"
                     name={title}
                     id={title}
-                    defaultValue={this.state.input}
+                    value={this.state.input}
                     onClick={() => {this.setSelected()}} />
                 
                 { selected && this.renderHistory() }
