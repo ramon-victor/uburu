@@ -12,7 +12,7 @@
 
 package br.com.uburu.spring.document;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
@@ -26,57 +26,29 @@ import br.com.uburu.spring.utils.Indices;
 @Setting(settingPath = "static/es-setting.json")
 public class File {
 
-    public static class Line {
-
-        private String content;
-        private int number;
-
-        public Line(String content, int number) {
-            this.content = content;
-            this.number = number;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
-
-        public int getNumber() {
-            return number;
-        }
-
-        public void setNumber(int number) {
-            this.number = number;
-        }
-
-    }
-
     @Id
     @Field(type = FieldType.Keyword)
-    private long id;
+    private String id;
 
     @Field(type = FieldType.Object)
-    private List<Line> lines;
+    private Map<Integer, String> lines;
 
     @Field(type = FieldType.Text)
     private String path;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public List<Line> getLines() {
+    public Map<Integer, String> getLines() {
         return lines;
     }
 
-    public void setLines(List<Line> lines) {
+    public void setLines(Map<Integer, String> lines) {
         this.lines = lines;
     }
 

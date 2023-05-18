@@ -38,5 +38,9 @@ public class KeywordService {
     public Keyword save(Keyword keyword) {
         return repository.save(keyword);
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
     
 }

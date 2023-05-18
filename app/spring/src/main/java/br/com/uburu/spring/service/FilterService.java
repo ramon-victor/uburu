@@ -37,5 +37,9 @@ public class FilterService {
     public Filter save(Filter filter) {
         return repository.save(filter);
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
     
 }

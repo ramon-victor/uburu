@@ -28,7 +28,7 @@ public class Path {
 
     @Id
     @Field(type = FieldType.Keyword)
-    private long id;
+    private String id;
 
     @Field(type = FieldType.Text)
     private String path;
@@ -36,11 +36,11 @@ public class Path {
     @Field(type = FieldType.Date)
     private Date date;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

@@ -18,19 +18,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.document.File;
-import br.com.uburu.spring.document.Filter;
-import br.com.uburu.spring.document.Keyword;
 import br.com.uburu.spring.document.Path;
 import br.com.uburu.spring.service.FileService;
-import br.com.uburu.spring.utils.CaseUtils;
 import br.com.uburu.spring.utils.Indexer;
 
 /**
@@ -40,31 +37,29 @@ import br.com.uburu.spring.utils.Indexer;
 @RestController
 @RequestMapping("/api/v1/search")
 @CrossOrigin(origins = "http://localhost:3000")
-public class SearchController {
+public class FileController {
 
     @Autowired
     private FileService service;
-    private final Indexer indexer = new Indexer();
+
+    @Autowired
+    private Indexer indexer;
 
     @GetMapping
-    public ResponseEntity<List<File>> findFiles(
-        @RequestBody Keyword keyword,
-        @RequestBody Filter filter,
-        @PathVariable boolean ignoreCase
-    ) {
-        List<String> keywords = List.of(keyword.getKeyWords().trim().split(","));
-        List<File> results = service.search(keywords);
-
-        if (!ignoreCase) {
-            CaseUtils.dealWithCaseSensitiveness(results, keywords);
-        }
-
+    public ResponseEntity<List<File>> findFiles() {
+        List<File> results = service.search();
         return new ResponseEntity<List<File>>(results, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<?> index(@RequestBody Path path) {
         indexer.index(path.getPath());
+        return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteAll() {
+        service.deleteAll();
         return ResponseEntity.accepted().build();
     }
     

@@ -18,7 +18,7 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
 
 import br.com.uburu.spring.document.File;
 
-public interface FileRepository extends ElasticsearchRepository<File, Long> {
+public interface FileRepository extends ElasticsearchRepository<File, String> {
 
     Optional<File> findByPathIgnoreCaseContaining(String path);
 

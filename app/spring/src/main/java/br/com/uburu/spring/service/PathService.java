@@ -38,5 +38,9 @@ public class PathService {
     public Path save(Path path) {
         return repository.save(path);
     }
+
+    public void deleteAll() {
+        repository.deleteAll();
+    }
     
 }
