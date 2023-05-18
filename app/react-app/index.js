@@ -29,7 +29,7 @@ function createWindow() {
   if (webPreferences.devTools) mainWindow.webContents.openDevTools();
 
   // Aguardar o evento 'ready-to-show' antes de exibir a janela
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.webContents.on('did-finish-load', function() {
     mainWindow.show();
   });
 }
