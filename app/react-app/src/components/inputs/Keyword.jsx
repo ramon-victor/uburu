@@ -30,7 +30,7 @@ class Keyword extends Input {
                             <p value={item.keyword} onClick={() => this.props.updateDefaultValue(item)}>
                                 {item.keyword}
                             </p>
-                            <button onClick={() => this.deleteHistoryOption("keyword", item.id)}>
+                            <button onClick={() => this.deleteHistoryOption("keyword", item)}>
                                 <AiOutlineClose />
                             </button>
                         </div>

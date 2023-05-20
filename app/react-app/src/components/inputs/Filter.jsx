@@ -30,7 +30,7 @@ class Filter extends Input {
                             <p value={item.filter} onClick={() => this.props.updateDefaultValue(item)}>
                                 {item.filter}
                             </p>
-                            <button onClick={() => this.deleteHistoryOption("filter", item.id)}>
+                            <button onClick={() => this.deleteHistoryOption("filter", item)}>
                                 <AiOutlineClose />
                             </button>
                         </div>

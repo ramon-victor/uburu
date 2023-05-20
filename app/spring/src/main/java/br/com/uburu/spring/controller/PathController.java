@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.document.Path;
@@ -68,20 +67,18 @@ public class PathController {
 
     @PostMapping
     public ResponseEntity<Path> include(@RequestBody Path path) {
-        service.save(path);
-        return new ResponseEntity<Path>(path, HttpStatus.CREATED);
+        if (path.getId() == null) {
+            service.save(path);
+            return new ResponseEntity<Path>(path, HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteAll() {
-        service.deleteAll();
-        return ResponseEntity.accepted().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@RequestParam String id) {
-        if (service.findeById(id) != null) {
-            service.deleteById(id);
+    public ResponseEntity<?> delete(@RequestBody Path path) {
+        if (service.findeById(path.getId()) != null) {
+            service.deleteById(path.getId());
             return ResponseEntity.accepted().build();
         }
 

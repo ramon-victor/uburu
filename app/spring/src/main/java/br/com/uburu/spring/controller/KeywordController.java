@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.document.Keyword;
@@ -45,20 +44,18 @@ public class KeywordController {
 
     @PostMapping
     public ResponseEntity<Keyword> include(@RequestBody Keyword keyword) {
-        service.save(keyword);
-        return new ResponseEntity<Keyword>(keyword, HttpStatus.CREATED);
+        if (keyword.getId() == null) {
+            service.save(keyword);
+            return new ResponseEntity<Keyword>(keyword, HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteAll() {
-        service.deleteAll();
-        return ResponseEntity.accepted().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@RequestParam String id) {
-        if (service.findeById(id) != null) {
-            service.deleteById(id);
+    public ResponseEntity<?> delete(@RequestBody Keyword keyword) {
+        if (service.findeById(keyword.getId()) != null) {
+            service.deleteById(keyword.getId());
             return ResponseEntity.accepted().build();
         }
 

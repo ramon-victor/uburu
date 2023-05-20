@@ -30,7 +30,7 @@ class Path extends Input {
                             <p value={item.path} onClick={() => this.props.updateDefaultValue(item)}>
                                 {item.path}
                             </p>
-                            <button onClick={() => this.deleteHistoryOption("path", item.id)}>
+                            <button onClick={() => this.deleteHistoryOption("path", item)}>
                                 <AiOutlineClose />
                             </button>
                         </div>

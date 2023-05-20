@@ -42,14 +42,15 @@ class Input extends Component {
         }
     }
 
-    deleteHistoryOption(endpoint, key) {
-        const url = "http://localhost:8080/api/v1/" + endpoint + "/" + key;
-        const params = { id: key };
+    deleteHistoryOption(endpoint, param) {
+        const url = "http://localhost:8080/api/v1/" + endpoint;
+        const params = JSON.stringify(param);
 
         sendHttpRequest("DELETE", url, params)
             .then(response => {
-                if (response.status === 202) {
+                if (!response || response?.status === 202) {
                     toast("Item do histórico deletado com sucesso!");
+                    return;
                 }
 
                 if (response.status >= 400) {

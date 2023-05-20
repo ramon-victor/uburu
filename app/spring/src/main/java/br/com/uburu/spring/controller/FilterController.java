@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.document.Filter;
@@ -45,20 +44,18 @@ public class FilterController {
 
     @PostMapping
     public ResponseEntity<Filter> include(@RequestBody Filter filter) {
-        service.save(filter);
-        return new ResponseEntity<Filter>(filter, HttpStatus.CREATED);
+        if (filter.getId() == null) {
+            service.save(filter);
+            return new ResponseEntity<Filter>(filter, HttpStatus.CREATED);
+        }
+
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deleteAll() {
-        service.deleteAll();
-        return ResponseEntity.accepted().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteById(@RequestParam String id) {
-        if (service.findeById(id) != null) {
-            service.deleteById(id);
+    public ResponseEntity<?> delete(@RequestBody Filter filter) {
+        if (service.findeById(filter.getId()) != null) {
+            service.deleteById(filter.getId());
             return ResponseEntity.accepted().build();
         }
 

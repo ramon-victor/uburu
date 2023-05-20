@@ -34,28 +34,29 @@ class Container extends Component {
     }
 
     submit() {
-        const date = new Date().toISOString(),
-            keywordValue = this.state.keywordValue.keyword,
-            filterValue = this.state.filterValue.filter,
-            pathValue = this.state.pathValue.path;
+        if (this.state.keywordValue.keyword) {
+            sendHttpRequest(
+                "POST",
+                "http://localhost:8080/api/v1/keyword",
+                JSON.stringify(this.state.keywordValue)
+            );
+        }
 
-        sendHttpRequest(
-            "POST",
-            "http://localhost:8080/api/v1/keyword",
-            JSON.stringify({ date: date, keyword: keywordValue })
-        );
+        if (this.state.filterValue.filter) {
+            sendHttpRequest(
+                "POST",
+                "http://localhost:8080/api/v1/filter",
+                JSON.stringify(this.state.filterValue)
+            );
+        }
 
-        sendHttpRequest(
-            "POST",
-            "http://localhost:8080/api/v1/filter",
-            JSON.stringify({ date: date, filter: filterValue })
-        );
-
-        sendHttpRequest(
-            "POST",
-            "http://localhost:8080/api/v1/path",
-            JSON.stringify({ date: date, path: pathValue })
-        );
+        if (this.state.pathValue.path) {
+            sendHttpRequest(
+                "POST",
+                "http://localhost:8080/api/v1/path",
+                JSON.stringify(this.state.pathValue)
+            );
+        }
     }
 
     search() {
