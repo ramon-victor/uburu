@@ -31,7 +31,7 @@ public class Keyword {
     private String id;
 
     @Field(type = FieldType.Text)
-    private String keyWords;
+    private String keyword;
 
     @Field(type = FieldType.Date)
     private Date date;
@@ -44,12 +44,12 @@ public class Keyword {
         this.id = id;
     }
 
-    public String getKeyWords() {
-        return keyWords;
+    public String getKeyword() {
+        return keyword;
     }
 
-    public void setKeyWords(String keyWords) {
-        this.keyWords = keyWords;
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
     }
 
     public Date getDate() {

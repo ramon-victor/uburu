@@ -35,12 +35,20 @@ public class PathService {
         return paths;
     }
 
+    public Path findeById(String id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public Path save(Path path) {
         return repository.save(path);
     }
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public void deleteById(String id) {
+        repository.deleteById(id);
     }
     
 }

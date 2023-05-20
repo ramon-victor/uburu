@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.document.Filter;
@@ -52,6 +53,16 @@ public class FilterController {
     public ResponseEntity<?> deleteAll() {
         service.deleteAll();
         return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteById(@RequestParam String id) {
+        if (service.findeById(id) != null) {
+            service.deleteById(id);
+            return ResponseEntity.accepted().build();
+        }
+
+        return ResponseEntity.notFound().build();
     }
     
 }

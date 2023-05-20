@@ -34,12 +34,20 @@ public class FilterService {
         return filters;
     }
 
+    public Filter findeById(String id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public Filter save(Filter filter) {
         return repository.save(filter);
     }
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public void deleteById(String id) {
+        repository.deleteById(id);
     }
     
 }

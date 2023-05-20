@@ -35,12 +35,20 @@ public class KeywordService {
         return keywords;
     }
 
+    public Keyword findeById(String id) {
+        return repository.findById(id).orElse(null);
+    }
+
     public Keyword save(Keyword keyword) {
         return repository.save(keyword);
     }
 
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    public void deleteById(String id) {
+        repository.deleteById(id);
     }
     
 }
