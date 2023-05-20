@@ -1,6 +1,7 @@
 import Input from "../Input";
 import { sendHttpRequest } from "../../utils/sendRequest";
 import { GiBroom } from "react-icons/gi";
+import { AiOutlineClose } from "react-icons/ai";
 
 class Filter extends Input {
 
@@ -25,9 +26,14 @@ class Filter extends Input {
             <div>
                 {
                     repositories.map((item, index) => (
-                        <p key={index} value={item.filter} onClick={() => this.props.updateDefaultValue(item.filter)}>
-                            {item.filter}
-                        </p>
+                        <div key={index}>
+                            <p value={item.filter} onClick={() => this.props.updateDefaultValue(item)}>
+                                {item.filter}
+                            </p>
+                            <button onClick={() => this.deleteHistoryOption("filter", item.id)}>
+                                <AiOutlineClose />
+                            </button>
+                        </div>
                     ))
                 }
             </div>
@@ -40,6 +46,8 @@ class Filter extends Input {
 
         return (
             <>
+                {super.render()}
+                
                 <h2>{this.props.title}</h2>
                 <input
                     type="text"
@@ -47,13 +55,14 @@ class Filter extends Input {
                     id={this.props.id}
                     defaultValue={this.props.defaultValue}
                     placeholder={this.props.placeholder}
-                    onClick={() => {this.setSelected()}} />
+                    onChange={(e) => this.handleChange(e, "filter")}
+                    onClick={() => this.setSelected()} />
 
-                <button onClick={() => this.deleteHistory("filter")}>
+                <button onClick={() => this.props.updateDefaultValue({ filter: "" }, "filter")}>
                     <GiBroom />
                 </button>
-            
-                { selected && this.renderHistory() }
+
+                {selected && this.renderHistory()}
             </>
         );
     }

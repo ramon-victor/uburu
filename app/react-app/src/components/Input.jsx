@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { sendHttpRequest } from "../utils/sendRequest";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Input extends Component {
     
@@ -21,10 +23,43 @@ class Input extends Component {
         throw new Error('Function not implemented');
     }
 
-    deleteHistory(endpoint) {
-        sendHttpRequest("DELETE", "http://localhost/8080/api/v1/" + endpoint).catch(err => {
-            console.error(err);
-        });
+    handleChange(evt, key) {
+        const value = evt.target.value;
+
+        switch (key) {
+            case "keyword":
+                this.props.updateDefaultValue({ keyword: value }, key);
+                break;
+            case "filter":
+                this.props.updateDefaultValue({ filter: value }, key);
+                break;
+            case "path":
+                this.props.updateDefaultValue({ path: value }, key);
+                break;
+
+            // React reclama se não tiver opção default
+            default: break;
+        }
+    }
+
+    deleteHistoryOption(endpoint, key) {
+        const url = "http://localhost:8080/api/v1/" + endpoint + "/" + key;
+        const params = { id: key };
+
+        sendHttpRequest("DELETE", url, params)
+            .then(response => {
+                if (response.status === 202) {
+                    toast("Item do histórico deletado com sucesso!");
+                }
+
+                if (response.status >= 400) {
+                    const msg = "Error: " + response.error + "\nMessage: " + response.message;
+                    throw new Error(msg);
+                }
+            }).catch(err => {
+                toast("Ocorreu um erro ao deletar o item do histórico.")
+                console.error(err);
+            });
     }
 
     // Fechar a sidebar quando pegar cliques do lado de fora
@@ -45,7 +80,11 @@ class Input extends Component {
     }
 
     render() {
-        return (<></>);
+        return (
+            <>
+                <ToastContainer />
+            </>
+        );
     }
 
 }

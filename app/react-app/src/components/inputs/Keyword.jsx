@@ -1,6 +1,7 @@
 import Input from "../Input";
 import { sendHttpRequest } from "../../utils/sendRequest";
 import { GiBroom } from 'react-icons/gi'
+import { AiOutlineClose } from "react-icons/ai";
 
 class Keyword extends Input {
 
@@ -25,9 +26,14 @@ class Keyword extends Input {
             <div>
                 {
                     repositories.map((item, index) => (
-                        <p key={index} value={item.keyword} onClick={() => this.props.updateDefaultValue(item.keyword)}>
-                            {item.keyword}
-                        </p>
+                        <div key={index}>
+                            <p value={item.keyword} onClick={() => this.props.updateDefaultValue(item)}>
+                                {item.keyword}
+                            </p>
+                            <button onClick={() => this.deleteHistoryOption("keyword", item.id)}>
+                                <AiOutlineClose />
+                            </button>
+                        </div>
                     ))
                 }
             </div>
@@ -40,6 +46,8 @@ class Keyword extends Input {
 
         return (
             <>
+                {super.render()}
+
                 <h2>{this.props.title}</h2>
                 <input
                     type="text"
@@ -47,13 +55,14 @@ class Keyword extends Input {
                     id={this.props.id}
                     defaultValue={this.props.defaultValue}
                     placeholder={this.props.placeholder}
-                    onClick={() => {this.setSelected()}} />
+                    onChange={(e) => this.handleChange(e, "keyword")}
+                    onClick={() => this.setSelected()} />
 
-                <button onClick={() => this.deleteHistory("keyword")}>
+                <button onClick={() => this.props.updateDefaultValue({ keyword: "" }, "keyword")}>
                     <GiBroom />
                 </button>
 
-                { selected && this.renderHistory() }
+                {selected && this.renderHistory()}
             </>
         );
     }

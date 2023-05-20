@@ -1,6 +1,7 @@
 import Input from "../Input";
 import { sendHttpRequest } from "../../utils/sendRequest";
 import { GiBroom } from 'react-icons/gi'
+import { AiOutlineClose } from "react-icons/ai";
 
 class Path extends Input {
 
@@ -25,9 +26,14 @@ class Path extends Input {
             <div>
                 {
                     repositories.map((item, index) => (
-                        <p key={index} value={item.path} onClick={() => this.props.updateDefaultValue(item.path)}>
-                            {item.path}
-                        </p>
+                        <div key={index}>
+                            <p value={item.path} onClick={() => this.props.updateDefaultValue(item)}>
+                                {item.path}
+                            </p>
+                            <button onClick={() => this.deleteHistoryOption("path", item.id)}>
+                                <AiOutlineClose />
+                            </button>
+                        </div>
                     ))
                 }
             </div>
@@ -40,6 +46,8 @@ class Path extends Input {
 
         return (
             <>
+                {super.render()}
+
                 <h2>{this.props.title}</h2>
                 <input
                     type="text"
@@ -47,13 +55,14 @@ class Path extends Input {
                     id={this.props.id}
                     defaultValue={this.props.defaultValue}
                     placeholder={this.props.placeholder}
-                    onClick={() => {this.setSelected()}} />
+                    onChange={(e) => this.handleChange(e, "path")}
+                    onClick={() => this.setSelected()} />
 
-                <button onClick={() => this.deleteHistory("path")}>
+                <button onClick={() => this.props.updateDefaultValue({ path: "" }, "path")}>
                     <GiBroom />
                 </button>
 
-                { selected && this.renderHistory() }
+                {selected && this.renderHistory()}
             </>
         );
     }
