@@ -59,7 +59,7 @@ class Filter extends Input {
                         onChange={(e) => this.handleChange(e, "filter")}
                         onClick={() => this.setSelected()} />
 
-                    <button className="input-buttons" onClick={() => this.props.updateDefaultValue({ filter: "" }, "filter")}>
+                    <button className="input-buttons" onClick={() => this.clear(this.props.id, { filter: "" }, "filter")}>
                         <GiBroom />
                     </button>
                 </div>

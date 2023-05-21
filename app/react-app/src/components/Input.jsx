@@ -81,6 +81,11 @@ class Input extends Component {
         this.setState({ selected });
     }
 
+    clear(id, value, endpoint) {
+        document.getElementById(id).value = '';
+        this.props.updateDefaultValue(value, endpoint);
+    }
+
     render() {
         return (
             <>

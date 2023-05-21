@@ -21,9 +21,11 @@ class Container extends Component {
             case "keyword":
                 this.setState({ keywordValue: value });
                 break;
+
             case "filter":
                 this.setState({ filterValue: value });
                 break;
+                
             case "path":
                 this.setState({ pathValue: value });
                 break;

@@ -59,7 +59,7 @@ class Keyword extends Input {
                         onChange={(e) => this.handleChange(e, "keyword")}
                         onClick={() => this.setSelected()} />
 
-                    <button className="input-buttons" onClick={() => this.props.updateDefaultValue({ keyword: "" }, "keyword")}>
+                    <button className="input-buttons" onClick={() => this.clear(this.props.id, { keyword: "" }, "keyword")}>
                         <GiBroom />
                     </button>
                 </div>

@@ -73,7 +73,7 @@ class Path extends Input {
                         <MdBrowserUpdated />
                     </button>
                     
-                    <button className="input-buttons" onClick={() => this.props.updateDefaultValue({ path: "" }, "path")}>
+                    <button className="input-buttons" onClick={() => this.clear(this.props.id, { path: "" }, "path")}>
                         <GiBroom />
                     </button>
                 </div>
