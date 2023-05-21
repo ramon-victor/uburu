@@ -54,7 +54,7 @@ class Keyword extends Input {
                         type="text"
                         name={this.props.name}
                         id={this.props.id}
-                        defaultValue={this.props.defaultValue}
+                        value={this.props.defaultValue}
                         placeholder={this.props.placeholder}
                         onChange={(e) => this.handleChange(e, "keyword")}
                         onClick={() => this.setSelected()} />
