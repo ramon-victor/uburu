@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "@electron/remote": "^2.0.9",
     "react-icons": "^4.8.0",
     "react-toastify": "^9.1.3"
   }

@@ -49,18 +49,20 @@ class Filter extends Input {
                 {super.render()}
                 
                 <h2>{this.props.title}</h2>
-                <input
-                    type="text"
-                    name={this.props.name}
-                    id={this.props.id}
-                    defaultValue={this.props.defaultValue}
-                    placeholder={this.props.placeholder}
-                    onChange={(e) => this.handleChange(e, "filter")}
-                    onClick={() => this.setSelected()} />
+                <div className="input-content">
+                    <input
+                        type="text"
+                        name={this.props.name}
+                        id={this.props.id}
+                        defaultValue={this.props.defaultValue}
+                        placeholder={this.props.placeholder}
+                        onChange={(e) => this.handleChange(e, "filter")}
+                        onClick={() => this.setSelected()} />
 
-                <button onClick={() => this.props.updateDefaultValue({ filter: "" }, "filter")}>
-                    <GiBroom />
-                </button>
+                    <button className="input-buttons" onClick={() => this.props.updateDefaultValue({ filter: "" }, "filter")}>
+                        <GiBroom />
+                    </button>
+                </div>
 
                 {selected && this.renderHistory()}
             </>

@@ -2,6 +2,7 @@ import Input from "../Input";
 import { sendHttpRequest } from "../../utils/sendRequest";
 import { GiBroom } from 'react-icons/gi'
 import { AiOutlineClose } from "react-icons/ai";
+import { MdBrowserUpdated } from "react-icons/md";
 
 class Path extends Input {
 
@@ -40,6 +41,15 @@ class Path extends Input {
         );
     }
 
+    callPathSelector() {
+        sendHttpRequest("GET", "http://localhost:8080/api/v1/path/select")
+            .then(path => {
+                this.props.updateDefaultValue(path, "path");
+            }).catch(err => {
+                console.error(err);
+            });
+    }
+
     render() {
         const selected = this.state.selected;
         this.outClickListener(this.props.id);
@@ -49,18 +59,24 @@ class Path extends Input {
                 {super.render()}
 
                 <h2>{this.props.title}</h2>
-                <input
-                    type="text"
-                    name={this.props.name}
-                    id={this.props.id}
-                    defaultValue={this.props.defaultValue}
-                    placeholder={this.props.placeholder}
-                    onChange={(e) => this.handleChange(e, "path")}
-                    onClick={() => this.setSelected()} />
-
-                <button onClick={() => this.props.updateDefaultValue({ path: "" }, "path")}>
-                    <GiBroom />
-                </button>
+                <div className="input-content">
+                    <input
+                        type="text"
+                        name={this.props.name}
+                        id={this.props.id}
+                        defaultValue={this.props.defaultValue}
+                        placeholder={this.props.placeholder}
+                        onChange={(e) => this.handleChange(e, "path")}
+                        onClick={() => this.setSelected()} />
+                        
+                    <button className="input-buttons" onClick={() => this.callPathSelector()}>
+                        <MdBrowserUpdated />
+                    </button>
+                    
+                    <button className="input-buttons" onClick={() => this.props.updateDefaultValue({ path: "" }, "path")}>
+                        <GiBroom />
+                    </button>
+                </div>
 
                 {selected && this.renderHistory()}
             </>

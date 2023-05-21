@@ -12,9 +12,11 @@
 
 package br.com.uburu.spring.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.swing.JFileChooser;
+import javax.swing.UIManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,11 +49,13 @@ public class PathController {
     @GetMapping("/select")
     public ResponseEntity<Path> select() {
         try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        
             final JFileChooser fc = new JFileChooser();
+            fc.setCurrentDirectory(fc.getFileSystemView().getParentDirectory(new File("C:\\")));  
             fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
             
-            int resp = fc.showSaveDialog(null);
-            if (resp == JFileChooser.APPROVE_OPTION) {
+            if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
                 final Path path = new Path();
                 path.setPath(fc.getSelectedFile().getAbsolutePath());
 

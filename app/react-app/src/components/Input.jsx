@@ -2,6 +2,7 @@ import { Component } from "react";
 import { sendHttpRequest } from "../utils/sendRequest";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import './styles/Input.css'
 
 class Input extends Component {
     
