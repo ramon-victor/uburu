@@ -60,13 +60,13 @@ public class SearchController {
         @RequestBody Boolean subFolders,
         @RequestBody boolean ignoreCase
     ) {
-        List<Line> lines = lineService.findByContent(keyword.getKeyword(), ignoreCase);
-        lines = Validator.removeInvalidExtensionFiles(filter, lines);
+        final List<Line> lines = lineService.findByContent(keyword.getKeyword(), ignoreCase);
+        Validator.removeInvalidExtensionFiles(filter, lines);
 
         // Se for pra considerar os subrepositórios, retorna a lista inteira
         if (subFolders) return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
 
-        lines = Validator.removeInvalidLines(path, lines);
+        Validator.removeInvalidLines(path, lines);
         return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
     }
 

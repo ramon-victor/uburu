@@ -17,7 +17,8 @@ public final class PathFinder {
         fc.setCurrentDirectory(fc.getFileSystemView().getParentDirectory(new File("C:\\")));  
         fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
-        if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+        int value = fc.showOpenDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
             final Path path = new Path();
             path.setPath(fc.getSelectedFile().getAbsolutePath());
 
