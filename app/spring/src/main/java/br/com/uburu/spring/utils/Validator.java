@@ -2,9 +2,9 @@ package br.com.uburu.spring.utils;
 
 import java.util.List;
 
-import br.com.uburu.spring.document.Filter;
-import br.com.uburu.spring.document.Line;
-import br.com.uburu.spring.document.Path;
+import br.com.uburu.spring.entity.Filter;
+import br.com.uburu.spring.entity.Line;
+import br.com.uburu.spring.entity.Path;
 
 public final class Validator {
 

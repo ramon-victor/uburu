@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.uburu.spring.document.Path;
+import br.com.uburu.spring.entity.Path;
 import br.com.uburu.spring.service.PathService;
 import br.com.uburu.spring.utils.PathFinder;
 

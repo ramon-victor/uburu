@@ -18,7 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.uburu.spring.document.File;
+import br.com.uburu.spring.entity.File;
 import br.com.uburu.spring.repository.FileRepository;
 
 @Service

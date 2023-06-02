@@ -12,13 +12,12 @@
 
 package br.com.uburu.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.uburu.spring.document.Filter;
+import br.com.uburu.spring.entity.Filter;
 import br.com.uburu.spring.repository.FilterRepository;
 
 @Service
@@ -28,13 +27,10 @@ public class FilterService {
     private FilterRepository repository;
 
     public List<Filter> getAll() {
-        List<Filter> filters = new ArrayList<>();
-        repository.findAll().forEach(filters::add);
-
-        return filters;
+        return repository.findAll();
     }
 
-    public Filter findeById(String id) {
+    public Filter findeById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -46,7 +42,7 @@ public class FilterService {
         repository.deleteAll();
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
     

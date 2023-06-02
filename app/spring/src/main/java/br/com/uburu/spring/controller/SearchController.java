@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.uburu.spring.document.Filter;
-import br.com.uburu.spring.document.Keyword;
-import br.com.uburu.spring.document.Line;
-import br.com.uburu.spring.document.Path;
+import br.com.uburu.spring.entity.Filter;
+import br.com.uburu.spring.entity.Keyword;
+import br.com.uburu.spring.entity.Line;
+import br.com.uburu.spring.entity.Path;
 import br.com.uburu.spring.service.FileService;
 import br.com.uburu.spring.service.LineService;
 import br.com.uburu.spring.utils.Indexer;

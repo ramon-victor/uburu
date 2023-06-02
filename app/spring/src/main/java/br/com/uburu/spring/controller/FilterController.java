@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.uburu.spring.document.Filter;
+import br.com.uburu.spring.entity.Filter;
 import br.com.uburu.spring.service.FilterService;
 
 @RestController

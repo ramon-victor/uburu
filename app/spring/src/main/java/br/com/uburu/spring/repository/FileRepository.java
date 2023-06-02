@@ -14,11 +14,11 @@ package br.com.uburu.spring.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.uburu.spring.document.File;
+import br.com.uburu.spring.entity.File;
 
-public interface FileRepository extends ElasticsearchRepository<File, String> {
+public interface FileRepository extends JpaRepository<File, Long> {
 
     Optional<File> findByPathIgnoreCaseContaining(String path);
 

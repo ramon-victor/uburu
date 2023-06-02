@@ -1,13 +1,15 @@
 package br.com.uburu.spring.repository;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import java.util.List;
 
-import br.com.uburu.spring.document.Line;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LineRepository extends ElasticsearchRepository<Line, String> {
+import br.com.uburu.spring.entity.Line;
 
-    Iterable<Line> findByContentContaining(String content);
+public interface LineRepository extends JpaRepository<Line, Long> {
+
+    List<Line> findByContentContaining(String content);
     
-    Iterable<Line> findByContentIgnoreCaseContaining(String content);
+    List<Line> findByContentIgnoreCaseContaining(String content);
     
 }

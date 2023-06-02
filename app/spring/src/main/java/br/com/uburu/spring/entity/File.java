@@ -10,32 +10,36 @@
  *  Uburu
  */
 
-package br.com.uburu.spring.document;
+package br.com.uburu.spring.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import br.com.uburu.spring.utils.Indices;
-
-@Document(indexName = Indices.FILE)
+@Entity
 public class File {
 
     @Id
-    @Field(type = FieldType.Keyword)
-    private String id;
-
-    @Field(type = FieldType.Text)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
     private String path;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPath() {

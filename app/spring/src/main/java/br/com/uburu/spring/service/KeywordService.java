@@ -12,13 +12,12 @@
 
 package br.com.uburu.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.uburu.spring.document.Keyword;
+import br.com.uburu.spring.entity.Keyword;
 import br.com.uburu.spring.repository.KeywordRepository;
 import br.com.uburu.spring.service.KeywordService;
 
@@ -29,13 +28,10 @@ public class KeywordService {
     private KeywordRepository repository;
 
     public List<Keyword> getAll() {
-        List<Keyword> keywords = new ArrayList<>();
-        repository.findAll().forEach(keywords::add);
-
-        return keywords;
+        return repository.findAll();
     }
 
-    public Keyword findeById(String id) {
+    public Keyword findeById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -47,7 +43,7 @@ public class KeywordService {
         repository.deleteAll();
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
     

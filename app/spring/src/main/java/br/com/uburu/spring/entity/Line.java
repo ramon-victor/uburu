@@ -1,35 +1,28 @@
-package br.com.uburu.spring.document;
+package br.com.uburu.spring.entity;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
-import org.springframework.data.elasticsearch.annotations.Field;
-import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import br.com.uburu.spring.utils.Indices;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
-@Document(indexName = Indices.LINE)
+@Entity
 public class Line {
 
     @Id
-    @Field(type = FieldType.Keyword)
-    private String id;
-
-    @Field(type = FieldType.Integer)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int lineNumber;
-
-    @Field(type = FieldType.Text)
     private String content;
 
     @ManyToOne
-    @Field(type = FieldType.Object)
     private File file;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

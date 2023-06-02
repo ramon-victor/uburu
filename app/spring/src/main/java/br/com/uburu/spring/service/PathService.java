@@ -12,13 +12,12 @@
 
 package br.com.uburu.spring.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.uburu.spring.document.Path;
+import br.com.uburu.spring.entity.Path;
 import br.com.uburu.spring.repository.PathRepository;
 import br.com.uburu.spring.service.PathService;
 
@@ -29,13 +28,10 @@ public class PathService {
     private PathRepository repository;
 
     public List<Path> getAll() {
-        List<Path> paths = new ArrayList<>();
-        repository.findAll().forEach(paths::add);
-
-        return paths;
+        return repository.findAll();
     }
 
-    public Path findeById(String id) {
+    public Path findeById(Long id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -47,7 +43,7 @@ public class PathService {
         repository.deleteAll();
     }
 
-    public void deleteById(String id) {
+    public void deleteById(Long id) {
         repository.deleteById(id);
     }
     

@@ -12,8 +12,8 @@
 
 package br.com.uburu.spring.repository;
 
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.uburu.spring.document.Keyword;
+import br.com.uburu.spring.entity.Keyword;
 
-public interface KeywordRepository extends ElasticsearchRepository<Keyword, String> {}
+public interface KeywordRepository extends JpaRepository<Keyword, Long> {}

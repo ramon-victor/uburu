@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 
-import br.com.uburu.spring.document.Path;
+import br.com.uburu.spring.entity.Path;
 
 public final class PathFinder {
 
