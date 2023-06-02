@@ -69,7 +69,7 @@ public final class Indexer {
         for (final File entry : folder.listFiles()) {
             if (entry.isDirectory()) {
                 index(entry);
-            } else {
+            } else if (entry.isFile()) {
                 generateIndex(entry);
             }
         }

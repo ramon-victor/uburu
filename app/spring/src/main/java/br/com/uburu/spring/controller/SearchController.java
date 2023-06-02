@@ -70,10 +70,19 @@ public class SearchController {
         return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
     }
 
+    @GetMapping("/all")
+    public ResponseEntity<List<Line>> findAllLines() {
+        return new ResponseEntity<List<Line>>(lineService.findAll(), HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> index(@RequestBody Path path) {
-        indexer.index(path.getPath());
-        return ResponseEntity.accepted().build();
+        try {
+            indexer.index(path.getPath());
+            return ResponseEntity.accepted().build();
+        } catch (final Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @DeleteMapping
