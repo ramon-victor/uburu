@@ -12,8 +12,7 @@
 
 package br.com.uburu.spring.utils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.File;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.com.uburu.spring.service.FileService;
+import br.com.uburu.spring.service.LineService;
 
 /**
  * Classe responsável pela criação dos índices
@@ -30,16 +30,19 @@ import br.com.uburu.spring.service.FileService;
 public final class Indexer {
 
     @Autowired
-    private FileService service;
+    private FileService fileService;
+
+    @Autowired
+    private LineService lineService;
     private static final Logger logger = LoggerFactory.getLogger(Indexer.class);
 
     /**
      * Cria o índice a partir de um arquivo
      * @param File entry
      */
-    private void generateIndex(final java.io.File entry) {
+    private void generateIndex(final File entry) {
+        var file = fileService.save(entry.getAbsolutePath());
         Scanner scanner = null;
-        Map<Integer, String> lines = new HashMap<>();
         
         try {
             scanner = new Scanner(entry);
@@ -47,7 +50,7 @@ public final class Indexer {
             int cont = 1;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                lines.put(cont, line);
+                lineService.save(file, line, cont);
 
                 cont ++;
             }
@@ -56,16 +59,14 @@ public final class Indexer {
         } finally {
             scanner.close();
         }
-
-        service.save(lines, entry.getAbsolutePath());
     }
 
     /**
      * Percorre os repositórios gerando os índices
      * @param File folder
      */
-    public void index(final java.io.File folder) {
-        for (final java.io.File entry : folder.listFiles()) {
+    public void index(final File folder) {
+        for (final File entry : folder.listFiles()) {
             if (entry.isDirectory()) {
                 index(entry);
             } else {
@@ -79,7 +80,7 @@ public final class Indexer {
      * @param String path
      */
     public void index(final String path) {
-        final java.io.File folder = new java.io.File(path);
+        final File folder = new File(path);
         index(folder);
     }
     

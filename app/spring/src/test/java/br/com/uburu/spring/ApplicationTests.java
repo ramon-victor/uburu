@@ -45,15 +45,15 @@ class ApplicationTests {
 		assertThat(filterController).isNotNull();
 		assertThat(keywordController).isNotNull();
 		assertThat(pathController).isNotNull();
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		date = formatter.format(new Date(System.currentTimeMillis()));
 	}
 
 	@Test
 	void filterHistoryTest() throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		date = formatter.format(new Date(System.currentTimeMillis()));
+
 		JSONObject history = new JSONObject();
-		history.put("extensionFilter", "txt, php, java");
+		history.put("filter", "txt, php, java");
 		history.put("date", date);
 
 		MvcResult mvcResult = mock.perform(
@@ -63,21 +63,25 @@ class ApplicationTests {
 		).andExpect(status().isCreated()).andReturn();
 
 		String result = mvcResult.getResponse().getContentAsString();
-		JSONObject jsonObject = new JSONObject(result);
 
 		mock.perform(
 			get("/api/v1/filter")
 		).andExpect(status().isOk());
 		
 		mock.perform(
-			delete("/api/v1/filter/" + jsonObject.getLong("id"))
+			delete("/api/v1/filter")
+			.content(result)
+			.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(status().isAccepted());
 	}
 
 	@Test
 	void keywordHistoryTest() throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		date = formatter.format(new Date(System.currentTimeMillis()));
+
 		JSONObject history = new JSONObject();
-		history.put("keyWords", "Uburu & \" utilizada \"");
+		history.put("keyword", "Uburu & \" utilizada \"");
 		history.put("date", date);
 
 		MvcResult mvcResult = mock.perform(
@@ -87,19 +91,23 @@ class ApplicationTests {
 		).andExpect(status().isCreated()).andReturn();
 
 		String result = mvcResult.getResponse().getContentAsString();
-		JSONObject jsonObject = new JSONObject(result);
 
 		mock.perform(
 			get("/api/v1/keyword")
 		).andExpect(status().isOk());
 		
 		mock.perform(
-			delete("/api/v1/keyword/" + jsonObject.getLong("id"))
+			delete("/api/v1/keyword")
+			.content(result)
+			.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(status().isAccepted());
 	}
 
 	@Test
 	void pathHistoryTest() throws Exception {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		date = formatter.format(new Date(System.currentTimeMillis()));
+
 		JSONObject history = new JSONObject();
 		history.put("path", "src\\test\\java\\br\\com\\uburu\\spring");
 		history.put("date", date);
@@ -111,14 +119,15 @@ class ApplicationTests {
 		).andExpect(status().isCreated()).andReturn();
 
 		String result = mvcResult.getResponse().getContentAsString();
-		JSONObject jsonObject = new JSONObject(result);
 
 		mock.perform(
 			get("/api/v1/path")
 		).andExpect(status().isOk());
 		
 		mock.perform(
-			delete("/api/v1/path/" + jsonObject.getLong("id"))
+			delete("/api/v1/path")
+			.content(result)
+			.contentType(MediaType.APPLICATION_JSON)
 		).andExpect(status().isAccepted());
 	}
 

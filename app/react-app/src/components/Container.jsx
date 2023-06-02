@@ -12,7 +12,9 @@ class Container extends Component {
         this.state = {
             keywordValue: { keyword: "" },
             filterValue: { filter: "" },
-            pathValue: { path: "" }
+            pathValue: { path: "" },
+            subfolders: true,
+            ignoreCase: true
         };
     }
 
@@ -61,6 +63,16 @@ class Container extends Component {
         }
     }
 
+    changeSubfolders() {
+        const subfolders = !this.state.subfolders;
+        this.setState({ subfolders });
+    }
+
+    changeIgnoreCase() {
+        const ignoreCase = !this.state.ignoreCase;
+        this.setState({ ignoreCase });
+    }
+
     search() {
         this.submit();
 
@@ -78,6 +90,12 @@ class Container extends Component {
                         placeholder="Digite aqui as palavras-chave"
                         defaultValue={this.state.keywordValue.keyword}
                         updateDefaultValue={(value) => this.updateDefaultValue(value, "keyword")} />
+                    <label htmlFor="ignore-case">Considerar capitalização</label>
+                    <input
+                        type="checkbox"
+                        checked={this.state.ignoreCase}
+                        onChange={() => this.changeIgnoreCase()}
+                        name="ignore-case" id="ignore-case" />
 
                     <Filter
                         title="Filtros / Extensões"
@@ -86,6 +104,12 @@ class Container extends Component {
                         placeholder="*.js; *.jsx;"
                         defaultValue={this.state.filterValue.filter}
                         updateDefaultValue={(value) => this.updateDefaultValue(value, "filter")} />
+                    <label htmlFor="subfolders">Considerar subrepositórios</label>
+                    <input
+                        type="checkbox"
+                        checked={this.state.subfolders}
+                        onChange={() => this.changeSubfolders()}
+                        name="subfolders" id="subfolders" />
 
                     <Path
                         title="Caminhos aceitos"

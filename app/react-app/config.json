@@ -5,7 +5,7 @@
     },
 
     "webPreferences": {
-        "devTools": false,
+        "devTools": true,
         "nodeIntegration": false
     }
 }

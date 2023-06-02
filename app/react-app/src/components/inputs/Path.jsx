@@ -44,7 +44,7 @@ class Path extends Input {
     callPathSelector() {
         sendHttpRequest("GET", "http://localhost:8080/api/v1/path/select")
             .then(path => {
-                this.props.updateDefaultValue(path, "path");
+                if (path) this.props.updateDefaultValue(path, "path");
             }).catch(err => {
                 console.error(err);
             });

@@ -12,11 +12,8 @@
 
 package br.com.uburu.spring.controller;
 
-import java.io.File;
 import java.util.List;
-
-import javax.swing.JFileChooser;
-import javax.swing.UIManager;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.document.Path;
 import br.com.uburu.spring.service.PathService;
+import br.com.uburu.spring.utils.PathFinder;
 
 @RestController
 @RequestMapping("/api/v1/path")
@@ -49,17 +47,10 @@ public class PathController {
     @GetMapping("/select")
     public ResponseEntity<Path> select() {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            final Optional<Path> path = PathFinder.findPath();
         
-            final JFileChooser fc = new JFileChooser();
-            fc.setCurrentDirectory(fc.getFileSystemView().getParentDirectory(new File("C:\\")));  
-            fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            
-            if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                final Path path = new Path();
-                path.setPath(fc.getSelectedFile().getAbsolutePath());
-
-                return new ResponseEntity<Path>(path, HttpStatus.OK);
+            if (path.isPresent()) {
+                return new ResponseEntity<Path>(path.get(), HttpStatus.OK);
             }
         
             return ResponseEntity.notFound().build();

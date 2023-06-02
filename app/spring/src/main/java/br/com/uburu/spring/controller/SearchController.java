@@ -25,10 +25,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.uburu.spring.document.File;
+import br.com.uburu.spring.document.Filter;
+import br.com.uburu.spring.document.Keyword;
+import br.com.uburu.spring.document.Line;
 import br.com.uburu.spring.document.Path;
 import br.com.uburu.spring.service.FileService;
+import br.com.uburu.spring.service.LineService;
 import br.com.uburu.spring.utils.Indexer;
+import br.com.uburu.spring.utils.Validator;
 
 /**
  * A classe SearchController é responsável por administrar todas as pesquisas do aplicativo.
@@ -37,18 +41,33 @@ import br.com.uburu.spring.utils.Indexer;
 @RestController
 @RequestMapping("/api/v1/search")
 @CrossOrigin(origins = "http://localhost:3000")
-public class FileController {
+public class SearchController {
 
     @Autowired
-    private FileService service;
+    private FileService fileService;
+
+    @Autowired
+    private LineService lineService;
 
     @Autowired
     private Indexer indexer;
 
     @GetMapping
-    public ResponseEntity<List<File>> findFiles() {
-        List<File> results = service.search();
-        return new ResponseEntity<List<File>>(results, HttpStatus.OK);
+    public ResponseEntity<List<Line>> findLines(
+        @RequestBody Keyword keyword,
+        @RequestBody Filter filter,
+        @RequestBody Path path,
+        @RequestBody Boolean subFolders,
+        @RequestBody boolean ignoreCase
+    ) {
+        List<Line> lines = lineService.findByContent(keyword.getKeyword(), ignoreCase);
+        lines = Validator.removeInvalidExtensionFiles(filter, lines);
+
+        // Se for pra considerar os subrepositórios, retorna a lista inteira
+        if (subFolders) return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
+
+        lines = Validator.removeInvalidLines(path, lines);
+        return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
     }
 
     @PostMapping
@@ -59,7 +78,8 @@ public class FileController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteAll() {
-        service.deleteAll();
+        fileService.deleteAll();
+        lineService.deleteAll();
         return ResponseEntity.accepted().build();
     }
     

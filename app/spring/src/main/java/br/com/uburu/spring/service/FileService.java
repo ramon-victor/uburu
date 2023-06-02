@@ -14,7 +14,6 @@ package br.com.uburu.spring.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +27,11 @@ public class FileService {
     @Autowired
     private FileRepository repository;
 
-    public List<File> search() {
+    public File findByPath(String path) {
+        return repository.findByPathIgnoreCaseContaining(path).orElse(null);
+    }
+
+    public List<File> findAll() {
         List<File> files = new ArrayList<>();
         repository.findAll().forEach(files::add);
 
@@ -39,9 +42,8 @@ public class FileService {
         return repository.save(file);
     }
 
-    public File save(Map<Integer, String> lines, String path) {
+    public File save(String path) {
         File file = new File();
-        file.setLines(lines);
         file.setPath(path);
 
         return repository.save(file);
