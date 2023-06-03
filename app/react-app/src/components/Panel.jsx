@@ -1,19 +1,13 @@
 import { Component } from "react";
+import "./styles/Panel.css";
 
 class Panel extends Component {
 
-    constructor(props) {
-        super(props);
-
-        const resultList = props.resultList;
-        this.state = { resultList };
-    }
-
     render() {
-        const list = this.state.resultList;
+        const list = this.props.resultList;
 
         return (
-            <div>
+            <div className="panel">
                 {
                     list.map((item, index) => (
                         <p key={index}>{item}</p>

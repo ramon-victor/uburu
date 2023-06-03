@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Keyword from "./inputs/Keyword";
 import Path from "./inputs/Path";
 import Filter from "./inputs/Filter";
+import Panel from "./Panel";
 import { sendHttpRequest } from "../utils/sendRequest";
 
 class Container extends Component {
@@ -120,6 +121,9 @@ class Container extends Component {
                         updateDefaultValue={(value) => this.updateDefaultValue(value, "path")} />
                 </div>
                 <button onClick={() => this.search()}>Pesquisar</button>
+
+                <Panel resultList={[1, 2, 3, 4, 5]}></Panel>
+                <Panel resultList={[1, 2, 3, 4, 5]}></Panel>
             </>
         );
     }
