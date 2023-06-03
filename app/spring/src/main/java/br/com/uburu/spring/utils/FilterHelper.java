@@ -6,7 +6,7 @@ import br.com.uburu.spring.entity.Filter;
 import br.com.uburu.spring.entity.Line;
 import br.com.uburu.spring.entity.Path;
 
-public final class Validator {
+public final class FilterHelper {
 
     /**
      * Remove os arquivos com caminhos inválidos
@@ -14,7 +14,7 @@ public final class Validator {
      * @param List<Line> lines
      * @return List<Line>
      */
-    public static List<Line> removeInvalidLines(Path pathEntity, List<Line> lines) {
+    public static List<Line> filterByPath(Path pathEntity, List<Line> lines) {
         if (pathEntity.getPath() == null || pathEntity.getPath().isEmpty()) return lines;
 
         for (final String path : pathEntity.getPath().split(";")) {
@@ -40,7 +40,7 @@ public final class Validator {
      * @param List<Line> lines
      * @return List<Line>
      */
-    public static List<Line> removeInvalidExtensionFiles(Filter filterEntity, List<Line> lines) {
+    public static List<Line> filterByExtension(Filter filterEntity, List<Line> lines) {
         if (filterEntity.getFilter() == null || filterEntity.getFilter().isEmpty()) return lines;
 
         for (final String filter : filterEntity.getFilter().split(";")) {

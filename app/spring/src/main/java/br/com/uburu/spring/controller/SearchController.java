@@ -32,7 +32,8 @@ import br.com.uburu.spring.entity.Path;
 import br.com.uburu.spring.service.FileService;
 import br.com.uburu.spring.service.LineService;
 import br.com.uburu.spring.utils.Indexer;
-import br.com.uburu.spring.utils.Validator;
+import br.com.uburu.spring.utils.RequestParams;
+import br.com.uburu.spring.utils.FilterHelper;
 
 /**
  * A classe SearchController é responsável por administrar todas as pesquisas do aplicativo.
@@ -53,26 +54,26 @@ public class SearchController {
     private Indexer indexer;
 
     @GetMapping
-    public ResponseEntity<List<Line>> findLines(
-        @RequestBody Keyword keyword,
-        @RequestBody Filter filter,
-        @RequestBody Path path,
-        @RequestBody Boolean subFolders,
-        @RequestBody boolean ignoreCase
-    ) {
+    public ResponseEntity<List<Line>> findAllLines() {
+        return new ResponseEntity<List<Line>>(lineService.findAll(), HttpStatus.OK);
+    }
+
+    @PostMapping("/find")
+    public ResponseEntity<List<Line>> findLines(@RequestBody RequestParams params) {
+        final Path path = params.getPath();
+        final Filter filter = params.getFilter();
+        final Keyword keyword = params.getKeyword();
+        final boolean subFolders = params.isSubFolders();
+        final boolean ignoreCase = params.isIgnoreCase();
+
         final List<Line> lines = lineService.findByContent(keyword.getKeyword(), ignoreCase);
-        Validator.removeInvalidExtensionFiles(filter, lines);
+        FilterHelper.filterByExtension(filter, lines);
 
         // Se for pra considerar os subrepositórios, retorna a lista inteira
         if (subFolders) return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
 
-        Validator.removeInvalidLines(path, lines);
+        FilterHelper.filterByPath(path, lines);
         return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
-    }
-
-    @GetMapping("/all")
-    public ResponseEntity<List<Line>> findAllLines() {
-        return new ResponseEntity<List<Line>>(lineService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping

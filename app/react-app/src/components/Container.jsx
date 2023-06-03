@@ -4,18 +4,23 @@ import Path from "./inputs/Path";
 import Filter from "./inputs/Filter";
 import Panel from "./Panel";
 import { sendHttpRequest } from "../utils/sendRequest";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Container extends Component {
 
     constructor(props) {
         super(props);
 
+        const date = new Date().toISOString();
         this.state = {
-            keywordValue: { keyword: "" },
-            filterValue: { filter: "" },
-            pathValue: { path: "" },
+            keywordValue: { keyword: "", date: date },
+            filterValue: { filter: "", date: date },
+            pathValue: { path: "", date: date },
             subfolders: true,
-            ignoreCase: true
+            ignoreCase: true,
+            files: [],
+            lines: []
         };
     }
 
@@ -39,7 +44,7 @@ class Container extends Component {
     }
 
     submit() {
-        if (this.state.keywordValue.keyword) {
+        if (this.state.keywordValue.keyword && !this.state.keywordValue.id) {
             sendHttpRequest(
                 "POST",
                 "http://localhost:8080/api/v1/keyword",
@@ -47,7 +52,7 @@ class Container extends Component {
             );
         }
 
-        if (this.state.filterValue.filter) {
+        if (this.state.filterValue.filter && !this.state.filterValue.id) {
             sendHttpRequest(
                 "POST",
                 "http://localhost:8080/api/v1/filter",
@@ -55,7 +60,7 @@ class Container extends Component {
             );
         }
 
-        if (this.state.pathValue.path) {
+        if (this.state.pathValue.path && !this.state.pathValue.id) {
             sendHttpRequest(
                 "POST",
                 "http://localhost:8080/api/v1/path",
@@ -77,12 +82,50 @@ class Container extends Component {
     search() {
         this.submit();
 
-        // TODO: Método para preencher os quadros com o resultado da pesquisa
+        if (this.state.keywordValue.keyword) {
+            var self = this;
+            
+            sendHttpRequest(
+                "POST",
+                "http://localhost:8080/api/v1/search/find",
+                JSON.stringify({
+                    "path": this.state.pathValue,
+                    "filter": this.state.filterValue,
+                    "keyword": this.state.keywordValue,
+                    "subFolders": this.state.subfolders,
+                    "ignoreCase": this.state.ignoreCase
+                })
+            ).then(response => {
+                debugger;
+                if (response?.status === 200) {
+                    const files = [], lines = [];
+
+                    response.forEach(element => {
+                        lines.push(element.content);
+                        files.push(element.file.name);
+                    });
+
+                    self.setState({ lines });
+                    self.setState({ files });
+                }
+
+                if (response.status >= 400) {
+                    const msg = "Error: " + response.error + "\nMessage: " + response.message;
+                    throw new Error(msg);
+                }
+            }).catch(err => {
+                toast("Ocorreu um erro ao realizar a pesquisa.")
+                console.error(err);
+            });
+
+            this.forceUpdate();
+        }
     }
 
     render() {
         return (
             <>
+                <ToastContainer />
                 <div className="inputs">
                     <Keyword
                         title="Pesquisa"
@@ -121,9 +164,10 @@ class Container extends Component {
                         updateDefaultValue={(value) => this.updateDefaultValue(value, "path")} />
                 </div>
                 <button onClick={() => this.search()}>Pesquisar</button>
+                <br />
 
-                <Panel resultList={[1, 2, 3, 4, 5]}></Panel>
-                <Panel resultList={[1, 2, 3, 4, 5]}></Panel>
+                <Panel resultList={this.state.files}></Panel>
+                <Panel resultList={this.state.lines}></Panel>
             </>
         );
     }

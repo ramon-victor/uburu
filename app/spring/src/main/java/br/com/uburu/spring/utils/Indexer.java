@@ -41,7 +41,7 @@ public final class Indexer {
      * @param File entry
      */
     private void generateIndex(final File entry) {
-        var file = fileService.save(entry.getAbsolutePath());
+        var file = fileService.save(entry.getAbsolutePath(), entry.getName());
         Scanner scanner = null;
         
         try {

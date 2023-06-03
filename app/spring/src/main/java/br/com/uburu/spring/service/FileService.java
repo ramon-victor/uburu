@@ -42,9 +42,10 @@ public class FileService {
         return repository.save(file);
     }
 
-    public File save(String path) {
+    public File save(String path, String name) {
         File file = new File();
         file.setPath(path);
+        file.setName(name);
 
         return repository.save(file);
     }
