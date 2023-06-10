@@ -1,0 +1,27 @@
+/* Esse arquivo aqui é extremamente perigoso a nível de lixo radioativo. Mantenha a distância segura. */
+
+.info {
+    margin: 1%;
+}
+
+.info p {
+    background-color: rgba(35, 35, 35, 0.95);
+    text-align: center;
+    color: white;
+    max-width: 100px;
+	width: fit-content;
+	height: fit-content;
+    padding: 5px;
+    position: fixed;
+	border-radius: 5px;
+    display: inline;
+}
+
+.info p:after {
+	content: "";
+	position: absolute;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid rgba(35, 35, 35, 0.95);
+	top: -5px;
+	left: 0;
+}

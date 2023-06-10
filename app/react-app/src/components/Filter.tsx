@@ -3,6 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GiBroom } from "react-icons/gi";
 import { DeleteMethod, GetMethod } from "../utils/RestMethods";
 import { toast } from 'react-toastify';
+import { Info } from "./Info";
 
 export interface Filter {
     filter: string;
@@ -71,9 +72,15 @@ export const FilterInput = (props: any): JSX.Element => {
         }
     });
 
+    const info = "Este campo contém as extensões de arquivos aceitas na pesquisa. "
+    + "Para selecionar múltiplas extensões, utilize \";\".";
+
     return (
         <>
-            <h2>{props.title}</h2>
+            <h2>
+                {props.title}
+                {<Info info={info} />}
+            </h2>
             <div className="input-content">
                 <input
                     className={props.className}

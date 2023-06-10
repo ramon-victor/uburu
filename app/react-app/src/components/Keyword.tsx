@@ -3,6 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GiBroom } from "react-icons/gi";
 import { DeleteMethod, GetMethod } from "../utils/RestMethods";
 import { toast } from 'react-toastify';
+import { Info } from "./Info";
 
 export interface Keyword {
     keyword: string;
@@ -71,9 +72,14 @@ export const KeywordInput = (props: any): JSX.Element => {
         }
     });
 
+    const info = "Este campo contém as palavras que devem ser buscadas.";
+
     return (
         <>
-            <h2>{props.title}</h2>
+            <h2>
+                {props.title}
+                {<Info info={info} />}
+            </h2>
             <div className="input-content">
                 <input
                     className={props.className}

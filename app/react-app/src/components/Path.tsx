@@ -4,6 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdBrowserUpdated } from "react-icons/md";
 import { DeleteMethod, GetMethod } from "../utils/RestMethods";
 import { toast } from 'react-toastify';
+import { Info } from "./Info";
 
 export interface Path {
     path: string;
@@ -81,9 +82,16 @@ export const PathInput = (props: any): JSX.Element => {
         }
     });
 
+    const info = "Este campo contém os repositórios aceitos na pesquisa. "
+    + "Para selecionar múltiplos repositórios, utilize \";\" e para "
+    + "definir repositórios inválidos, utilize \"!\".";
+
     return (
         <>
-            <h2>{props.title}</h2>
+            <h2>
+                {props.title}
+                {<Info info={info} />}
+            </h2>
             <div className="input-content">
                 <input
                     className={props.className}
