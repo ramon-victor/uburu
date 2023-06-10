@@ -88,8 +88,8 @@ public class SearchController {
 
     @DeleteMapping
     public ResponseEntity<?> deleteAll() {
-        fileService.deleteAll();
         lineService.deleteAll();
+        fileService.deleteAll();
         return ResponseEntity.accepted().build();
     }
     

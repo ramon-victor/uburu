@@ -1,5 +1,6 @@
 package br.com.uburu.spring.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uburu.spring.entity.Filter;
@@ -17,20 +18,23 @@ public final class FilterHelper {
     public static List<Line> filterByPath(Path pathEntity, List<Line> lines) {
         if (pathEntity.getPath() == null || pathEntity.getPath().isEmpty()) return lines;
 
+        List<Line> linesToRemove = new ArrayList<>();
+
         for (final String path : pathEntity.getPath().split(";")) {
             for (final Line line : lines) {
                 if (path.charAt(0) == '!') {
                     if (line.getFile().getPath().contains(path)) {
-                        lines.remove(line);
+                        linesToRemove.add(line);
                     }
                 } else {
                     if (!line.getFile().getPath().contains(path)) {
-                        lines.remove(line);
+                        linesToRemove.add(line);
                     }
                 }
             }
         }
 
+        lines.removeAll(linesToRemove);
         return lines;
     }
 
@@ -43,14 +47,17 @@ public final class FilterHelper {
     public static List<Line> filterByExtension(Filter filterEntity, List<Line> lines) {
         if (filterEntity.getFilter() == null || filterEntity.getFilter().isEmpty()) return lines;
 
+        List<Line> linesToRemove = new ArrayList<>();
+
         for (final String filter : filterEntity.getFilter().split(";")) {
             for (final Line line : lines) {
                 if (!line.getFile().getPath().contains(filter)) {
-                    lines.remove(line);
+                    linesToRemove.add(line);
                 }
             }
         }
 
+        lines.removeAll(linesToRemove);
         return lines;
     }
     
