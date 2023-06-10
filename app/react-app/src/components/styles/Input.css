@@ -1,26 +1,72 @@
-.input-content {
-    margin: auto;
-    display: flex;
-    flex-direction: row;
-    border: 1px solid darkgrey;
-    padding: 1px;
-    width: fit-content;
+@import url("./History.css");
+
+.inputs {
+    margin: 1% 1% 2% 5%;
+    width: 70%;
 }
 
-input {
+.inputs h2 {
+    font-size: 16px;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+.inputs label {
+    float: left;
+}
+
+.input-content {
+    display: flex;
+    flex-direction: row;
+    border: none;
+    padding: 1px;
+    width: 100%;
+}
+
+.input-content label {
+    float: left;
+    color: white;
+    font-size: small;
+    margin-left: 10px;
+    padding-top: 3px;
+    max-width: fit-content;
+    max-height: fit-content;
+}
+
+.fields {
     flex-grow: 2;
     border: none;
+    background-color: rgb(53, 53, 53);
+    height: 25px;
+    padding-left: 10px;
+    border-radius: 5px 0 0 5px;
+    color: white;
+}
+
+input::placeholder {
+    color: darkgray;
+    opacity: 1;
 }
 
 input:focus {
     outline: none;
 }
 
-.input-content:focus-within { 
-    outline: 1px solid darkgray;
+input:focus-within {
+    color: white;
 }
 
 .input-buttons {
     border: none;
-    background: transparent;
+    background-color: rgb(53, 53, 53);
+    border-radius: 0 5px 5px 0;
+}
+
+.select-button {
+    border: none;
+    background-color: rgb(53, 53, 53);
+}
+
+.input-buttons svg, .select-button svg {
+    color: white;
 }

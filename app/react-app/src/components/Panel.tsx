@@ -39,13 +39,11 @@ export const Panel = (props: any): JSX.Element => {
 
     const list = formatLines(props.fields);
 
-    useEffect(() => {
-        setContent([]);
-    }, [props.fields]);
+    useEffect(() => { setContent([]); }, [props.fields]);
 
     return (
         <>
-            <div className="panel">
+            <div className="panel" id="files">
                 {
                     list.map((item: any, index: number) => {
                         return (
@@ -54,7 +52,8 @@ export const Panel = (props: any): JSX.Element => {
                     })
                 }
             </div>
-            <div className="panel">
+            <span></span>
+            <div className="panel" id="lines">
                 {
                     content.map((item: { content: string, number: number }, index: number) => (
                         <div key={index}>

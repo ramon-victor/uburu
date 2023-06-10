@@ -1,10 +1,27 @@
+.results-panel {
+    height: 100%;
+    margin: auto;
+    padding: 5%;
+}
+
 .panel {
+    background-color: rgb(53, 53, 53);
     border: 1px solid black;
     border-radius: 5px;
-    box-shadow: 1px 1px 2px black;
-    width: 40%;
-    min-height: 100px;
+    width: 49%; /* 1% é de imposto */
+    min-height: 250px;
     overflow-y: scroll;
-    float: left;
     overflow: hidden;
+}
+
+#files {
+    margin-left: 0;
+    margin-right: auto;
+    float: left;
+}
+
+#lines {
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
 }

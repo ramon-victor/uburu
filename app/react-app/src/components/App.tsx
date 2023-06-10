@@ -98,8 +98,11 @@ export const App = (): JSX.Element => {
     <div className="App">
       <ToastContainer />
 
+      <button className="search-button" onClick={() => search()}>Pesquisar</button>
+
       <div className="inputs">
         <KeywordInput
+          className="fields"
           title="Pesquisa"
           id="keyword"
           name="keyword"
@@ -107,42 +110,35 @@ export const App = (): JSX.Element => {
           defaultValue={keyword?.keyword}
           updateDefaultValue={(value: Keyword) => updateDefaultValue(value, "keyword")}
         />
-        <label htmlFor="ignoreCase">Considerar capitalização</label>
-        <input
-          type="checkbox"
-          checked={ignoreCase}
-          onChange={() => { setIgnoreCase(!ignoreCase) }}
-          name="ignoreCase" id="ignoreCase" />
 
         <FilterInput
+          className="fields"
           title="Filtros / Extensões"
           id="filter"
           name="filter"
-          placeholder="*.js; *.jsx;"
+          placeholder="Exemplo: *.js; *.jsx;"
           defaultValue={filter?.filter}
           updateDefaultValue={(value: Filter) => updateDefaultValue(value, "filter")}
+          checked={ignoreCase}
+          setIgnoreCase={setIgnoreCase}
         />
 
-        <PathInput 
+        <PathInput
+          className="fields"
           title="Caminhos aceitos"
           id="path"
           name="path"
-          placeholder="C:\Users\Exemplo"
+          placeholder="Exemplo: C:\Users\Exemplo"
           defaultValue={path?.path}
           updateDefaultValue={(value: Path) => updateDefaultValue(value, "path")}
-        />
-        <label htmlFor="subFolders">Considerar subrepositórios</label>
-        <input
-          type="checkbox"
           checked={subFolders}
-          onChange={() => { setSubFolders(!subFolders) }}
-          name="subFolders" id="subFolders" />
+          setSubFolders={setSubFolders}
+        />
       </div>
-
-      <button onClick={() => search()}>Pesquisar</button>
-      <br />
       
-      <Panel fields={fields}></Panel>
+      <div className="results-panel">
+        <Panel fields={fields}></Panel>
+      </div>
     </div>
   );
 };

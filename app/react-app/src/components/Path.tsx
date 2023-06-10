@@ -55,7 +55,7 @@ export const PathInput = (props: any): JSX.Element => {
         if (path.length === 0) return (<div></div>);
 
         return (
-            <div>
+            <div className="history">
                 {
                     path.map((item: Path, index: number) => (
                         <div key={index}>
@@ -86,11 +86,12 @@ export const PathInput = (props: any): JSX.Element => {
             <h2>{props.title}</h2>
             <div className="input-content">
                 <input
+                    className={props.className}
                     type="text"
                     name={props.name}
                     id={props.id}
                     value={props.defaultValue}
-                    placeholder={props.placeholder}
+                    placeholder={selected ? "" : props.placeholder}
                     onChange={(e) => {
                         const path = {
                             path: e.target.value,
@@ -100,13 +101,20 @@ export const PathInput = (props: any): JSX.Element => {
                     }}
                     onClick={() => setSelected(true)} />
                     
-                <button className="input-buttons" onClick={() => callPathSelector()}>
+                <button className="select-button" onClick={() => callPathSelector()}>
                     <MdBrowserUpdated />
                 </button>
                 
                 <button className="input-buttons" onClick={() => props.updateDefaultValue({ path: "" }, "path")}>
                     <GiBroom />
                 </button>
+                
+                <label htmlFor="subFolders">Considerar subdiretórios</label>
+                <input
+                    type="checkbox"
+                    checked={props.checked}
+                    onChange={() => { props.setSubFolders(!props.checked) }}
+                    name="subFolders" id="subFolders" />
             </div>
 
             {selected && renderHistory()}

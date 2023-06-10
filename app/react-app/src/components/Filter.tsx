@@ -45,7 +45,7 @@ export const FilterInput = (props: any): JSX.Element => {
         if (filter.length === 0) return (<div></div>);
 
         return (
-            <div>
+            <div className="history">
                 {
                     filter.map((value: Filter, index: number) => (
                         <div key={index}>
@@ -76,11 +76,12 @@ export const FilterInput = (props: any): JSX.Element => {
             <h2>{props.title}</h2>
             <div className="input-content">
                 <input
+                    className={props.className}
                     type="text"
                     name={props.name}
                     id={props.id}
                     value={props.defaultValue}
-                    placeholder={props.placeholder}
+                    placeholder={selected ? "" : props.placeholder}
                     onChange={(e) => {
                         const filter = {
                             filter: e.target.value,
@@ -93,6 +94,13 @@ export const FilterInput = (props: any): JSX.Element => {
                 <button className="input-buttons" onClick={() => props.updateDefaultValue({ filter: "" }, "filter")}>
                     <GiBroom />
                 </button>
+
+                <label htmlFor="ignoreCase">Considerar capitalização</label>
+                <input
+                    type="checkbox"
+                    checked={props.checked}
+                    onChange={() => { props.setIgnoreCase(!props.ignoreCase) }}
+                    name="ignoreCase" id="ignoreCase" />
             </div>
 
             {selected && renderHistory()}

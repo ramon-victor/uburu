@@ -45,7 +45,7 @@ export const KeywordInput = (props: any): JSX.Element => {
         if (keyword.length === 0) return (<div></div>);
 
         return (
-            <div>
+            <div className="history">
                 {
                     keyword.map((item: Keyword, index: number) => (
                         <div key={index}>
@@ -76,11 +76,12 @@ export const KeywordInput = (props: any): JSX.Element => {
             <h2>{props.title}</h2>
             <div className="input-content">
                 <input
+                    className={props.className}
                     type="text"
                     name={props.name}
                     id={props.id}
                     value={props.defaultValue}
-                    placeholder={props.placeholder}
+                    placeholder={selected ? "" : props.placeholder}
                     onChange={(e) => {
                         const keyword = {
                             keyword: e.target.value,

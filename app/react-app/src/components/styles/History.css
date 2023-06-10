@@ -1,0 +1,35 @@
+.history {
+    background-color: rgb(53, 53, 53);
+    position: fixed;
+    width: 50%;
+    padding-left: 1%;
+    border: .5px solid black;
+    border-radius: 0 0 5px 5px;
+}
+
+.history div {
+    position: relative;
+}
+
+.history p {
+    margin: 0;
+    width: 100%;
+    line-height: 15px;
+    padding: 10px 0;
+}
+
+.history p:hover {
+    cursor: pointer;
+}
+
+.history button {
+    background-color: transparent;
+    border: none;
+    right: 0;
+    top: 10px;
+    position: absolute;
+}
+
+.history svg {
+    color: white;
+}
