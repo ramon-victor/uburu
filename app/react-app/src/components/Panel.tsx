@@ -41,13 +41,18 @@ export const Panel = (props: any): JSX.Element => {
 
     useEffect(() => { setContent([]); }, [props.fields]);
 
+    const getName = (path: string): string | undefined => {
+        const arr = path.split("\\");
+        return (`...\\${arr.slice(-3).join("\\")}`);
+    };
+
     return (
         <>
             <div className="panel" id="files">
                 {
                     list.map((item: any, index: number) => {
                         return (
-                            <p key={index} onClick={() => setContent(item.line)}>{item.path}</p>
+                            <p key={index} onClick={() => setContent(item.line)}>{getName(item.path)}</p>
                         )
                     })
                 }
