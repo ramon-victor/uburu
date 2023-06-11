@@ -34,7 +34,7 @@ export const PostMethod = (
 
 export const DeleteMethod = (
     url: string,
-    params: Document | XMLHttpRequestBodyInit | null,
+    params?: Document | XMLHttpRequestBodyInit | null,
     callback?: (status: number, response: any) => void
 ): void => {
     const deleteRequest = new XMLHttpRequest();

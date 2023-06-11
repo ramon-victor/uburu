@@ -24,6 +24,20 @@
     overflow: hidden;
 }
 
+.index p {
+    padding: 0 3%;
+    font-size: small;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+	text-overflow: ellipsis;
+    text-shadow: .5px .5px 1px black;
+}
+
+.index::-webkit-scrollbar {
+    display: none;
+}
+
 .index button {
     background-color: rgb(53, 53, 53);
     color: white;

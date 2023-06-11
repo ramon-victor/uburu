@@ -99,6 +99,7 @@ export const App = (): JSX.Element => {
     setPath({ path: "", date: new Date() });
     setFilter({ filter: "", date: new Date() });
     setKeyword({ keyword: "", date: new Date() });
+    setFields([]);
   }
 
   return (
@@ -123,7 +124,7 @@ export const App = (): JSX.Element => {
           title="Filtros / Extensões"
           id="filter"
           name="filter"
-          placeholder="Exemplo: *.js; *.jsx;"
+          placeholder="Exemplo: .js; .jsx;"
           defaultValue={filter?.filter}
           updateDefaultValue={(value: Filter) => updateDefaultValue(value, "filter")}
           checked={ignoreCase}

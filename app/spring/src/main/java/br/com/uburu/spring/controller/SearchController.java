@@ -26,10 +26,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.uburu.spring.entity.Filter;
+import br.com.uburu.spring.entity.Index;
 import br.com.uburu.spring.entity.Keyword;
 import br.com.uburu.spring.entity.Line;
 import br.com.uburu.spring.entity.Path;
 import br.com.uburu.spring.service.FileService;
+import br.com.uburu.spring.service.IndexService;
 import br.com.uburu.spring.service.LineService;
 import br.com.uburu.spring.utils.Indexer;
 import br.com.uburu.spring.utils.RequestParams;
@@ -51,11 +53,19 @@ public class SearchController {
     private LineService lineService;
 
     @Autowired
+    private IndexService indexService;
+
+    @Autowired
     private Indexer indexer;
 
     @GetMapping
-    public ResponseEntity<List<Line>> findAllLines() {
+    public ResponseEntity<List<Line>> getLines() {
         return new ResponseEntity<List<Line>>(lineService.findAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/indices")
+    public ResponseEntity<List<Index>> getIndices() {
+        return new ResponseEntity<List<Index>>(indexService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping("/find")
@@ -79,6 +89,7 @@ public class SearchController {
     @PostMapping
     public ResponseEntity<?> index(@RequestBody Path path) {
         try {
+            indexService.save(path.getPath());
             indexer.index(path.getPath());
             return ResponseEntity.accepted().build();
         } catch (final Exception e) {
@@ -90,6 +101,7 @@ public class SearchController {
     public ResponseEntity<?> deleteAll() {
         lineService.deleteAll();
         fileService.deleteAll();
+        indexService.deleteAll();
         return ResponseEntity.accepted().build();
     }
     
