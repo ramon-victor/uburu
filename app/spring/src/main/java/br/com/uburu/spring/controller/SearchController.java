@@ -78,11 +78,8 @@ public class SearchController {
 
         final List<Line> lines = lineService.findByContent(keyword.getKeyword(), ignoreCase);
         FilterHelper.filterByExtension(filter, lines);
-
-        // Se for pra considerar os subrepositórios, retorna a lista inteira
-        if (subFolders) return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
-
-        FilterHelper.filterByPath(path, lines);
+        FilterHelper.filterByPath(path, lines, subFolders);
+        
         return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
     }
 

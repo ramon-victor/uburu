@@ -38,21 +38,21 @@ export const App = (): JSX.Element => {
   };
 
   const submit = (): void => {
-    if (path?.path) {
+    if (path?.path && !path?.id) {
       PostMethod(
         "http://localhost:8080/api/v1/path",
         JSON.stringify(path)
       );
     }
 
-    if (filter?.filter) {
+    if (filter?.filter && !filter?.id) {
       PostMethod(
         "http://localhost:8080/api/v1/filter",
         JSON.stringify(filter)
       );
     }
 
-    if (keyword?.keyword) {
+    if (keyword?.keyword && !keyword?.id) {
       PostMethod(
         "http://localhost:8080/api/v1/keyword",
         JSON.stringify(keyword)

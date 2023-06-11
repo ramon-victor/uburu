@@ -23,6 +23,37 @@ public final class FilterHelper {
         for (final String path : pathEntity.getPath().split(";")) {
             for (final Line line : lines) {
                 if (path.charAt(0) == '!') {
+                    if (line.getFile().getPath().equals(path)) {
+                        linesToRemove.add(line);
+                    }
+                } else {
+                    if (!line.getFile().getPath().equals(path)) {
+                        linesToRemove.add(line);
+                    }
+                }
+            }
+        }
+
+        lines.removeAll(linesToRemove);
+        return lines;
+    }
+
+    /**
+     * Remove os arquivos com caminhos inválidos, considerandos os subrepositórios
+     * @param Path pathEntity
+     * @param List<Line> lines
+     * @param boolean subFolders
+     * @return List<Line>
+     */
+    public static List<Line> filterByPath(Path pathEntity, List<Line> lines, boolean subFolders) {
+        if (pathEntity.getPath() == null || pathEntity.getPath().isEmpty()) return lines;
+        if (!subFolders) return filterByPath(pathEntity, lines);
+
+        List<Line> linesToRemove = new ArrayList<>();
+
+        for (final String path : pathEntity.getPath().split(";")) {
+            for (final Line line : lines) {
+                if (path.charAt(0) == '!') {
                     if (line.getFile().getPath().contains(path)) {
                         linesToRemove.add(line);
                     }
