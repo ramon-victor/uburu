@@ -57,8 +57,7 @@ export const Panel = (props: any): JSX.Element => {
                 {
                     content.map((item: { content: string, number: number }, index: number) => (
                         <div key={index}>
-                            {item.number}
-                            <p>{item.content}</p>
+                            <p>Linha {item.number}: {item.content}</p>
                         </div>
                     ))
                 }

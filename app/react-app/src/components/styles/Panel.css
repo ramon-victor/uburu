@@ -9,9 +9,22 @@
     border: 1px solid black;
     border-radius: 5px;
     width: 49%; /* 1% é de imposto */
-    min-height: 45vh;
+    height: 45vh;
     overflow-y: scroll;
+}
+
+.panel p {
+    padding: 0 1%;
+    font-size: small;
+    font-weight: bold;
     overflow: hidden;
+    white-space: nowrap;
+	text-overflow: ellipsis;
+    text-shadow: .5px .5px 1px black;
+}
+
+.panel::-webkit-scrollbar {
+    display: none;
 }
 
 #files {
