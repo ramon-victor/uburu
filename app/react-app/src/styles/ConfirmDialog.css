@@ -1,12 +1,3 @@
-.confirm-dialog-background {
-    background-color: rgba(200, 200, 200);
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
-
 .confirm-dialog-container {
     margin: auto;
     width: 50%;

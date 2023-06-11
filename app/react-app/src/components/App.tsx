@@ -14,9 +14,10 @@ export const App = (): JSX.Element => {
   const [path, setPath] = useState<Path>({ path: "", date: new Date() });
   const [filter, setFilter] = useState<Filter>({ filter: "", date: new Date() });
   const [keyword, setKeyword] = useState<Keyword>({ keyword: "", date: new Date() });
+  const [fields, setFields] = useState<Line[]>([]);
   const [subFolders, setSubFolders] = useState(true);
   const [ignoreCase, setIgnoreCase] = useState(true);
-  const [fields, setFields] = useState<Line[]>([]);
+  const [disabled, setDisabled] = useState(false);
 
   const updateDefaultValue = (value: any, key: string): void => {
     switch (key) {
@@ -106,9 +107,9 @@ export const App = (): JSX.Element => {
     <div className="App">
       <ToastContainer />
 
-      <Index />
+      <Index disable={disabled} setDisabled={setDisabled} />
 
-      <div className="inputs">
+      <div className="inputs" aria-disabled={disabled}>
         <KeywordInput
           className="fields"
           title="Pesquisa"
@@ -116,6 +117,7 @@ export const App = (): JSX.Element => {
           name="keyword"
           placeholder="Digite aqui as palavras-chave"
           defaultValue={keyword?.keyword}
+          disable={disabled}
           updateDefaultValue={(value: Keyword) => updateDefaultValue(value, "keyword")}
         />
 
@@ -126,6 +128,7 @@ export const App = (): JSX.Element => {
           name="filter"
           placeholder="Exemplo: .js; .jsx;"
           defaultValue={filter?.filter}
+          disable={disabled}
           updateDefaultValue={(value: Filter) => updateDefaultValue(value, "filter")}
           checked={ignoreCase}
           setIgnoreCase={setIgnoreCase}
@@ -138,17 +141,18 @@ export const App = (): JSX.Element => {
           name="path"
           placeholder="Exemplo: C:\Users\Exemplo"
           defaultValue={path?.path}
+          disable={disabled}
           updateDefaultValue={(value: Path) => updateDefaultValue(value, "path")}
           checked={subFolders}
           setSubFolders={setSubFolders}
         />
       </div>
 
-      <button className="search-button" onClick={search}>Pesquisar</button>
-      <button className="clean-button" onClick={cleanAll}>Limpar</button>
+      <button disabled={disabled} className="search-button" onClick={search}>Pesquisar</button>
+      <button disabled={disabled} className="clean-button" onClick={cleanAll}>Limpar</button>
       
       <div className="results-panel">
-        <Panel fields={fields}></Panel>
+        <Panel disabled={disabled} fields={fields}></Panel>
       </div>
     </div>
   );

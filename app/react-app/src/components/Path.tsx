@@ -100,6 +100,7 @@ export const PathInput = (props: any): JSX.Element => {
                     id={props.id}
                     value={props.defaultValue}
                     placeholder={selected ? "" : props.placeholder}
+                    disabled={props.disable}
                     onChange={(e) => {
                         const path = {
                             path: e.target.value,
@@ -109,11 +110,11 @@ export const PathInput = (props: any): JSX.Element => {
                     }}
                     onClick={() => setSelected(true)} />
                     
-                <button className="select-button" onClick={() => callPathSelector()}>
+                <button disabled={props.disable} className="select-button" onClick={() => callPathSelector()}>
                     <MdBrowserUpdated />
                 </button>
                 
-                <button className="input-buttons" onClick={() => props.updateDefaultValue({ path: "" }, "path")}>
+                <button disabled={props.disable} className="input-buttons" onClick={() => props.updateDefaultValue({ path: "" }, "path")}>
                     <GiBroom />
                 </button>
                 
@@ -121,6 +122,7 @@ export const PathInput = (props: any): JSX.Element => {
                 <input
                     type="checkbox"
                     checked={props.checked}
+                    disabled={props.disable}
                     onChange={() => { props.setSubFolders(!props.checked) }}
                     name="subFolders" id="subFolders" />
             </div>

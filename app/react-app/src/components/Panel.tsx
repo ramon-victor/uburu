@@ -50,7 +50,7 @@ export const Panel = (props: any): JSX.Element => {
         <>
             <div className="panel" id="files">
                 {
-                    list.map((item: any, index: number) => {
+                    !props.disabled && list.map((item: any, index: number) => {
                         return (
                             <p key={index} onClick={() => setContent(item.line)}>{getName(item.path)}</p>
                         )
@@ -60,7 +60,7 @@ export const Panel = (props: any): JSX.Element => {
             <span></span>
             <div className="panel" id="lines">
                 {
-                    content.map((item: { content: string, number: number }, index: number) => (
+                    !props.disabled && content.map((item: { content: string, number: number }, index: number) => (
                         <div key={index}>
                             <p>Linha {item.number}: {item.content}</p>
                         </div>

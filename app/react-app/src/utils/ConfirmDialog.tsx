@@ -4,7 +4,8 @@ import '../styles/ConfirmDialog.css';
 export const ConfirmDialog = (props: any): JSX.Element => {
     const handleClick = (del: boolean) => {
         props.setDel(del);
-        props.setOpen(false)
+        props.setDisabled(false);
+        props.setOpen(false);
     };
 
     return (

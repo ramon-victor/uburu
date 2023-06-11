@@ -9,7 +9,7 @@ interface IndexInterface {
     path: string;
 };
 
-export const Index = (): JSX.Element => {
+export const Index = (props: any): JSX.Element => {
     const [indexList, setIndexList] = useState<IndexInterface[]>([]);
     const [open, setOpen] = useState(false);
     const [del, setDel] = useState(false);
@@ -33,6 +33,7 @@ export const Index = (): JSX.Element => {
     };
 
     const deleteIndex = (): void => {
+        props.setDisabled(true);
         setOpen(true);
 
         if (del) {
@@ -58,8 +59,8 @@ export const Index = (): JSX.Element => {
                         ))
                     }
                 </div>
-                <button className="add" onClick={addToIndex}>Novo</button>
-                <button className="delete-index" onClick={deleteIndex}>Exluir indice</button>
+                <button disabled={props.disabled} className="add" onClick={addToIndex}>Novo</button>
+                <button disabled={props.disabled} className="delete-index" onClick={deleteIndex}>Exluir indice</button>
             </div>
             {
                 open && <ConfirmDialog
@@ -67,6 +68,7 @@ export const Index = (): JSX.Element => {
                             text="Essa ação apagará o indice inteiro."
                             setOpen={setOpen}
                             setDel={setDel}
+                            setDisabled={props.setDisabled}
                         />
             }
         </>

@@ -89,6 +89,7 @@ export const FilterInput = (props: any): JSX.Element => {
                     id={props.id}
                     value={props.defaultValue}
                     placeholder={selected ? "" : props.placeholder}
+                    disabled={props.disable}
                     onChange={(e) => {
                         const filter = {
                             filter: e.target.value,
@@ -98,7 +99,7 @@ export const FilterInput = (props: any): JSX.Element => {
                     }}
                     onClick={() => setSelected(true)} />
 
-                <button className="input-buttons" onClick={() => props.updateDefaultValue({ filter: "" }, "filter")}>
+                <button disabled={props.disable} className="input-buttons" onClick={() => props.updateDefaultValue({ filter: "" }, "filter")}>
                     <GiBroom />
                 </button>
 
@@ -106,6 +107,7 @@ export const FilterInput = (props: any): JSX.Element => {
                 <input
                     type="checkbox"
                     checked={props.checked}
+                    disabled={props.disable}
                     onChange={() => { props.setIgnoreCase(!props.ignoreCase) }}
                     name="ignoreCase" id="ignoreCase" />
             </div>
