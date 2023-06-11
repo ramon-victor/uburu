@@ -58,6 +58,9 @@ public class SearchController {
     @Autowired
     private Indexer indexer;
 
+    @Autowired
+    private FilterHelper helper;
+
     @GetMapping
     public ResponseEntity<List<Line>> getLines() {
         return new ResponseEntity<List<Line>>(lineService.findAll(), HttpStatus.OK);
@@ -77,8 +80,8 @@ public class SearchController {
         final boolean ignoreCase = params.isIgnoreCase();
 
         final List<Line> lines = lineService.findByContent(keyword.getKeyword(), ignoreCase);
-        FilterHelper.filterByExtension(filter, lines);
-        FilterHelper.filterByPath(path, lines, subFolders);
+        helper.filterByExtension(filter, lines);
+        helper.filterByPath(path, lines, subFolders);
         
         return new ResponseEntity<List<Line>>(lines, HttpStatus.OK);
     }

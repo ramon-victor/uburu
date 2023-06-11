@@ -2,12 +2,27 @@ package br.com.uburu.spring.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import org.springframework.stereotype.Component;
 
 import br.com.uburu.spring.entity.Filter;
 import br.com.uburu.spring.entity.Line;
 import br.com.uburu.spring.entity.Path;
 
+@Component
 public final class FilterHelper {
+
+    /**
+     * Retorna a extensão de um aquivo
+     * @param filename
+     * @return
+     */
+    private Optional<String> getExtension(String filename) {
+        return Optional.ofNullable(filename)
+            .filter(f -> f.contains("."))
+            .map(f -> f.substring(filename.lastIndexOf(".")));
+    }
 
     /**
      * Remove os arquivos com caminhos inválidos
@@ -15,7 +30,7 @@ public final class FilterHelper {
      * @param List<Line> lines
      * @return List<Line>
      */
-    public static List<Line> filterByPath(Path pathEntity, List<Line> lines) {
+    public List<Line> filterByPath(Path pathEntity, List<Line> lines) {
         if (pathEntity.getPath() == null || pathEntity.getPath().isEmpty()) return lines;
 
         List<Line> linesToRemove = new ArrayList<>();
@@ -45,7 +60,7 @@ public final class FilterHelper {
      * @param boolean subFolders
      * @return List<Line>
      */
-    public static List<Line> filterByPath(Path pathEntity, List<Line> lines, boolean subFolders) {
+    public List<Line> filterByPath(Path pathEntity, List<Line> lines, boolean subFolders) {
         if (pathEntity.getPath() == null || pathEntity.getPath().isEmpty()) return lines;
         if (!subFolders) return filterByPath(pathEntity, lines);
 
@@ -75,14 +90,15 @@ public final class FilterHelper {
      * @param List<Line> lines
      * @return List<Line>
      */
-    public static List<Line> filterByExtension(Filter filterEntity, List<Line> lines) {
+    public List<Line> filterByExtension(Filter filterEntity, List<Line> lines) {
         if (filterEntity.getFilter() == null || filterEntity.getFilter().isEmpty()) return lines;
 
         List<Line> linesToRemove = new ArrayList<>();
 
-        for (final String filter : filterEntity.getFilter().split(";")) {
+        for (final String filter : filterEntity.getFilter().replaceAll("\\s","").split(";")) {
             for (final Line line : lines) {
-                if (!line.getFile().getPath().contains(filter)) {
+                final String ext = getExtension(line.getFile().getPath()).orElse(null);
+                if (!ext.contains(filter)) {
                     linesToRemove.add(line);
                 }
             }

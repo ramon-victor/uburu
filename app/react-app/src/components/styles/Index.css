@@ -24,7 +24,7 @@
     overflow: hidden;
 }
 
-.index p {
+.index div p {
     padding: 0 3%;
     font-size: small;
     font-weight: bold;

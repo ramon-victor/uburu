@@ -1,0 +1,50 @@
+.confirm-dialog-background {
+    background-color: rgba(200, 200, 200);
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.confirm-dialog-container {
+    margin: auto;
+    width: 50%;
+    height: 45%;
+    left: 25%;
+    top: 25%;
+    border-radius: 12px;
+    background-color: rgb(53, 53, 53);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: fixed;
+}
+
+.confirm-dialog-container .title {
+    text-align: center;
+    margin: 5% auto;
+}
+
+.confirm-dialog-container .body {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+    text-align: center;
+}
+
+.confirm-dialog-container .body button {
+    width: 150px;
+    height: 45px;
+    margin: 5% 2% 0 2%;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 8px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#cancel-button {
+    background-color: crimson;
+}
