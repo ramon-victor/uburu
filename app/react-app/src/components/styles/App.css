@@ -6,12 +6,23 @@
 .search-button {
   background-color: rgb(53, 53, 53);
   color: white;
-  float: right;
+  float: left;
   display: flex;
   padding: 5px 10px;
-  border: none;
+  border: 1px solid black;
   border-radius: 5px;
-  margin: 0 1% 0 auto;
+  margin: 0 0 0 5%;
+}
+
+.clean-button {
+  background-color: rgb(53, 53, 53);
+  color: white;
+  float: left;
+  display: flex;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 0 0 0 1%;
 }
 
 .App-header {

@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './styles/App.css';
 import './styles/Input.css';
+import { Index } from './Index';
 
 export const App = (): JSX.Element => {
   const [path, setPath] = useState<Path>({ path: "", date: new Date() });
@@ -59,7 +60,7 @@ export const App = (): JSX.Element => {
     }
   };
 
-  const search = () => {
+  const search = (): void => {
     submit();
 
     PostMethod(
@@ -94,11 +95,17 @@ export const App = (): JSX.Element => {
     );
   };
 
+  const cleanAll = (): void => {
+    setPath({ path: "", date: new Date() });
+    setFilter({ filter: "", date: new Date() });
+    setKeyword({ keyword: "", date: new Date() });
+  }
+
   return (
     <div className="App">
       <ToastContainer />
 
-      <button className="search-button" onClick={() => search()}>Pesquisar</button>
+      <Index />
 
       <div className="inputs">
         <KeywordInput
@@ -135,6 +142,9 @@ export const App = (): JSX.Element => {
           setSubFolders={setSubFolders}
         />
       </div>
+
+      <button className="search-button" onClick={search}>Pesquisar</button>
+      <button className="clean-button" onClick={cleanAll}>Limpar</button>
       
       <div className="results-panel">
         <Panel fields={fields}></Panel>

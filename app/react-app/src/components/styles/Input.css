@@ -2,7 +2,7 @@
 
 .inputs {
     margin: 1% 1% 2% 5%;
-    width: 70%;
+    width: 65%;
 }
 
 .inputs h2 {
@@ -35,7 +35,9 @@
 
 .fields {
     flex-grow: 2;
-    border: none;
+    border: 1px solid black;
+    border-right: none;
+    border-radius: 5px;
     background-color: rgb(53, 53, 53);
     height: 25px;
     padding-left: 10px;
@@ -57,13 +59,17 @@ input:focus-within {
 }
 
 .input-buttons {
-    border: none;
+    border: 1px solid black;
+    border-left: none;
+    border-radius: 5px;
     background-color: rgb(53, 53, 53);
     border-radius: 0 5px 5px 0;
 }
 
 .select-button {
-    border: none;
+    border: 1px solid black;
+    border-right: none;
+    border-left: none;
     background-color: rgb(53, 53, 53);
 }
 
