@@ -38,11 +38,11 @@ public final class FilterHelper {
         for (final String path : pathEntity.getPath().split(";")) {
             for (final Line line : lines) {
                 if (path.charAt(0) == '!') {
-                    if (line.getFile().getPath().equals(path)) {
+                    if (line.getFile().getPath().equals(path.substring(1))) {
                         linesToRemove.add(line);
                     }
                 } else {
-                    if (!line.getFile().getPath().equals(path)) {
+                    if (!line.getFile().getPath().equals(path.substring(1))) {
                         linesToRemove.add(line);
                     }
                 }
@@ -69,11 +69,11 @@ public final class FilterHelper {
         for (final String path : pathEntity.getPath().split(";")) {
             for (final Line line : lines) {
                 if (path.charAt(0) == '!') {
-                    if (line.getFile().getPath().contains(path)) {
+                    if (line.getFile().getPath().contains(path.substring(1))) {
                         linesToRemove.add(line);
                     }
                 } else {
-                    if (!line.getFile().getPath().contains(path)) {
+                    if (!line.getFile().getPath().contains(path.substring(1))) {
                         linesToRemove.add(line);
                     }
                 }
