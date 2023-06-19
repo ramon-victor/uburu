@@ -4,7 +4,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { MdBrowserUpdated } from "react-icons/md";
 import { DeleteMethod, GetMethod } from "../utils/RestMethods";
 import { toast } from 'react-toastify';
-import { Info } from "./Info";
+import { Tooltip } from "./Tooltip";
 
 export interface Path {
     path: string;
@@ -90,7 +90,7 @@ export const PathInput = (props: any): JSX.Element => {
         <>
             <h2>
                 {props.title}
-                {<Info info={info} />}
+                {<Tooltip info={info} />}
             </h2>
             <div className="input-content">
                 <input

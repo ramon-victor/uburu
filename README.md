@@ -66,6 +66,7 @@ Com essa ferramenta, os desenvolvedores poderão identificar rapidamente o códi
 - Electron
 - JQuery
 - Concurrently
+- MUI
 
 ## 7. Canais de comunicação das APIs
 - **{project_location}/api/v1/search**: API de busca dos arquivos

@@ -3,7 +3,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { GiBroom } from "react-icons/gi";
 import { DeleteMethod, GetMethod } from "../utils/RestMethods";
 import { toast } from 'react-toastify';
-import { Info } from "./Info";
+import { Tooltip } from "./Tooltip";
 
 export interface Keyword {
     keyword: string;
@@ -78,7 +78,7 @@ export const KeywordInput = (props: any): JSX.Element => {
         <>
             <h2>
                 {props.title}
-                {<Info info={info} />}
+                {<Tooltip info={info} />}
             </h2>
             <div className="input-content">
                 <input

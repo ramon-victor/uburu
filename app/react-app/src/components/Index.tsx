@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Info } from "./Info";
+import { Tooltip } from "./Tooltip";
 import './styles/Index.css';
 import { DeleteMethod, GetMethod, PostMethod } from "../utils/RestMethods";
 import ConfirmDialog from "../utils/ConfirmDialog";
@@ -51,7 +51,7 @@ export const Index = (props: any): JSX.Element => {
     return (
         <>
             <div className="index">
-                <h2>Indice {<Info info={info} />}</h2>
+                <h2>Indice{<Tooltip info={info} />}</h2>
                 <div>
                     {
                         indexList.map((path: IndexInterface, i: number) => (
@@ -59,8 +59,8 @@ export const Index = (props: any): JSX.Element => {
                         ))
                     }
                 </div>
-                <button disabled={props.disabled} className="add" onClick={addToIndex}>Novo</button>
-                <button disabled={props.disabled} className="delete-index" onClick={deleteIndex}>Exluir indice</button>
+                <button disabled={props.disabled} className="index-button add" onClick={addToIndex}>Novo</button>
+                <button disabled={props.disabled} className="index-button delete-index" onClick={deleteIndex}>Exluir indice</button>
             </div>
             {
                 open && <ConfirmDialog

@@ -1,0 +1,11 @@
+button.tooltip {
+	margin: auto;
+	padding: 0px;
+	height: min-content;
+	width: min-content;
+}
+
+.tooltip svg {
+	color: white;
+	height: 15px;
+}
